@@ -173,18 +173,11 @@ background-image: url(../image/swim.jpeg);
     }
   }
 
-.about-homestay {
-  border-bottom-style: solid;
-  border-color: lightblue;
-  border-width: 1px;
-}
 
 .logosection {
-  border-bottom-style: solid;
-  border-color: red;
   border-width: 1px;
-  border-left-style: solid;
-  border-color: lightblue;
+  border-left-style: solid ;
+  border-color: rgb(1, 11, 14);
   border-width: 1px;
 }
 
@@ -196,10 +189,7 @@ background-image: url(../image/swim.jpeg);
 
 .contact {
   border-left-style: solid;
-  border-color: lightblue;
-  border-width: 1px;
-  border-bottom-style: solid;
-  border-color: lightblue;
+  border-color: rgb(1, 10, 13);
   border-width: 1px;
 }
 
@@ -208,20 +198,44 @@ background-image: url(../image/swim.jpeg);
 }
 
 /* Social Media Icons */
-.contact .fa-instagram, 
-.contact .fa-facebook, 
-.contact .fa-twitter {
-  font-size: 50px;
+ .fa-icon {
+  font-size: 0px;
+}
+.fa-icon:hover{
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.contact .fa-instagram {
-  color: #e5e7eb;
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
 }
 
-.contact .fa-facebook {
-  color: #e4e7ec;
+.card-img-overlay {
+  transition: opacity 0.3s ease;
 }
 
-.contact .fa-twitter {
-  color: #eff1f5;
+.card:hover .card-img-overlay {
+  opacity: 0.9; 
 }
+
+.card-title a {
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-title a {
+  color: #FFD700; 
+}
+
+.gallery {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); 
+}
+
