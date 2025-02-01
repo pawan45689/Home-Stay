@@ -98,42 +98,191 @@ body{
     transform: translateX(0); 
   }
 }
-.camp{
-	background-image: url(../image/camp.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;
+.explore-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
 }
-.seq{
-	background-image: url(../image/Parking.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;
+
+/* Hover overlay */
+.explore-card .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
 }
-.travel{
-	background-image: url(../image/Travel.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;
-	
+.explore-card:hover .overlay {
+  opacity: 1;
 }
-.wifi{
-	background-image: url(../image/wifi.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;
+.overlay p {
+  margin: 0;
+  font-size: 1.2rem;
 }
-.food{
-	background-image: url(../image/Food.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;
+
+.room-description {
+  margin-top: 5px;
+  font-size: 0.9rem;
+  text-align: center;
 }
-.swim{
-background-image: url(../image/swim.jpeg);
-	background-size: cover;
-	background-repeat: no-repeat;	
+.facilities-type {
+  margin-top: 5rem;
+}
+
+.facility {
+  height: 300px;
+  background-color: transparent;
+  position: relative;
+  border: none;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.facility h4 {
+  font-weight: bold;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer; 
+}
+
+.facility-body {
+  padding: 20px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  visibility: hidden;  
+  opacity: 0; 
+  transition: visibility 0s 0.3s, opacity 0.3s ease;  
+}
+
+.facility:hover .facility-body {
+  visibility: visible;
+  opacity: 1;  
+  transition: opacity 0.3s ease, visibility 0s; 
 }
 
 .panel {
-  display: none;  /* Hide all panels initially */
+  text-align: center;
+  font-size: 1rem;
+  color: white;
 }
 
+.facility-heading {
+  background-color: rgba(0, 0, 0, 0.5); 
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  padding: 15px 0;
+}
+
+
+
+/* Background images for each facility card */
+.camp {
+  background-image: url(../image/camp.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.seq {
+  background-image: url(../image/Parking.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.travel {
+  background-image: url(../image/Travel.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.wifi {
+  background-image: url(../image/wifi.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.food {
+  background-image: url(../image/Food.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.swim {
+  background-image: url(../image/swim.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.stay-type {
+  border-radius: 15px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Image styling */
+.stay-type-img {
+  height: 200px;
+  object-fit: cover;
+  width: 100%;
+}
+
+/* Overlay and content appearance on hover */
+.stay-type:hover {
+  transform: scale(1.05);
+}
+
+.stay-type-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  flex-direction: column; 
+  text-align: center; 
+}
+
+.stay-type:hover .stay-type-overlay {
+  opacity: 1;
+}
+
+
+.stay-type-title a {
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  font-weight: bold;
+  margin-bottom: 10px; 
+}
+
+.stay-type-title a:hover {
+  color: #ffc107;
+}
+
+/* Paragraph styling */
+.stay-type-description {
+  color: white;
+  font-size: 1rem;
+  display: none;
+}
+
+.stay-type:hover .stay-type-description {
+  display: block;
+}
 
 .styl{
 	text-decoration: none;
@@ -142,11 +291,7 @@ background-image: url(../image/swim.jpeg);
 .styl:hover{
 	color: orange;
 }
-.fac{
-	background-color: rgba(0, 0, 0, 0.5); 
-	position: absolute; bottom: 0; left: 50%; 
-	transform: translateX(-50%)
-}
+
 
 .ins{
 	 float: left;
