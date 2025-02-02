@@ -227,15 +227,19 @@ body{
   position: relative;
   transition: transform 0.3s ease;
 }
+.testimonials-pic {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-/* Image styling */
 .stay-type-img {
   height: 200px;
   object-fit: cover;
   width: 100%;
 }
 
-/* Overlay and content appearance on hover */
 .stay-type:hover {
   transform: scale(1.05);
 }
