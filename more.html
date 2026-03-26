@@ -1,432 +1,460 @@
 <!DOCTYPE html>
-<html >
+<html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>MORE</title>
-	  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-	  <style type="text/css">
-	  	
-		@media (max-width: 767px) {
-		.carousel-inner .carousel-item > div {
-			display: none;
-		}
-		.carousel-inner .carousel-item > div:first-child {
-			display: block;
-		}
-	}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Stays - All India Homestay</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root { --brown:#4a3728; --gold:#c9a96e; --cream:#fdf6ee; --dark:#1a1208; --text:#3a2e22; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Jost',sans-serif; background:var(--cream); color:var(--text); }
+        .navbar { background:var(--brown) !important; padding:0.6rem 1rem; transition:all 0.3s; }
+        .navbar.scrolled { box-shadow:0 4px 20px rgba(0,0,0,0.3); }
+        .navbar-brand img { width:60px; height:60px; border-radius:50%; object-fit:cover; mix-blend-mode:lighten; }
+        .nav-link { color:#e8d5b7 !important; font-family:'Jost',sans-serif; font-weight:500; font-size:0.9rem; letter-spacing:0.05em; padding:0.5rem 1rem !important; position:relative; transition:color 0.3s; }
+        .nav-link::after { content:''; position:absolute; bottom:0; left:50%; width:0; height:2px; background:var(--gold); transition:all 0.3s; transform:translateX(-50%); }
+        .nav-link:hover::after,.nav-link.active::after { width:70%; }
+        .nav-link:hover { color:var(--gold) !important; }
+        .btn-login { background:transparent; border:1.5px solid var(--gold); color:var(--gold) !important; border-radius:3px; padding:0.3rem 1.2rem !important; font-size:0.85rem; }
+        .btn-login:hover { background:var(--gold); color:var(--brown) !important; }
+        .dropdown-menu { background:var(--brown); border:1px solid var(--gold); border-radius:0; }
+        .dropdown-item { color:#e8d5b7; font-family:'Jost',sans-serif; font-size:0.85rem; }
+        .dropdown-item:hover { background:var(--gold); color:var(--brown); }
+        .section-label { font-size:0.72rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; display:block; margin-bottom:0.5rem; }
+        .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(2rem,4vw,3rem); color:var(--brown); font-weight:600; }
 
-	.carousel-inner .carousel-item.active,
-	.carousel-inner .carousel-item-next,
-	.carousel-inner .carousel-item-prev {
-		display: flex;
-	}
+        .page-hero { margin-top:72px; height:420px; background:linear-gradient(rgba(15,8,3,0.62),rgba(74,55,40,0.65)), url('image/banner.jpeg') center/cover no-repeat; display:flex; align-items:center; justify-content:center; flex-direction:column; text-align:center; }
+        .page-hero .label { font-size:0.78rem; letter-spacing:0.3em; color:var(--gold); text-transform:uppercase; margin-bottom:1rem; }
+        .page-hero h1 { font-family:'Cormorant Garamond',serif; font-size:clamp(2.8rem,6vw,5rem); color:#fff; font-weight:600; }
+        .page-hero p { color:#e8d5b7; font-size:1.05rem; margin-top:1rem; max-width:540px; }
+        .hero-line { width:60px; height:2px; background:var(--gold); margin:1.2rem auto 0; }
 
-	/* medium and up screens */
-	@media (min-width: 768px) {
+        /* JUST LISTED */
+        .listed-section { padding:90px 0; }
+        .listed-card { background:#fff; overflow:hidden; transition:transform 0.3s, box-shadow 0.3s; }
+        .listed-card:hover { transform:translateY(-6px); box-shadow:0 15px 40px rgba(74,55,40,0.15); }
+        .listed-card .img-wrap { position:relative; overflow:hidden; height:240px; }
+        .listed-card .img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+        .listed-card:hover .img-wrap img { transform:scale(1.06); }
+        .new-badge { position:absolute; top:1rem; left:1rem; background:#c0392b; color:#fff; font-size:0.68rem; padding:0.25rem 0.7rem; letter-spacing:0.1em; text-transform:uppercase; font-weight:700; }
+        .price-badge { position:absolute; bottom:0; left:0; background:var(--brown); color:var(--gold); padding:0.4rem 0.9rem; font-family:'Cormorant Garamond',serif; font-size:1.1rem; }
+        .listed-card .card-body { padding:1.5rem; }
+        .listed-card h5 { font-family:'Cormorant Garamond',serif; color:var(--brown); font-size:1.3rem; margin-bottom:0.3rem; }
+        .listed-card .location { font-size:0.8rem; color:#9a8060; margin-bottom:0.7rem; }
+        .listed-card p { font-size:0.88rem; color:#6a5a4a; line-height:1.65; margin-bottom:1rem; }
+        .star-row { color:var(--gold); font-size:0.8rem; margin-bottom:1rem; }
+        .btn-book { background:var(--brown); color:#e8d5b7; border:none; padding:0.55rem 1.4rem; font-family:'Jost',sans-serif; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; border-radius:2px; transition:all 0.3s; text-decoration:none; display:inline-block; margin-right:0.5rem; }
+        .btn-book:hover { background:var(--gold); color:var(--brown); }
+        .btn-more { background:transparent; color:var(--brown); border:1.5px solid var(--brown); padding:0.5rem 1.2rem; font-family:'Jost',sans-serif; font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; border-radius:2px; transition:all 0.3s; text-decoration:none; display:inline-block; }
+        .btn-more:hover { background:var(--brown); color:#e8d5b7; }
 
-		.carousel-inner .carousel-item-end.active,
-		.carousel-inner .carousel-item-next {
-			transform: translateX(25%);
-		}
+        /* ROOM TYPES */
+        .rooms-section { padding:90px 0; background:#f5ede0; }
+        .room-card { background:#fff; overflow:hidden; height:100%; }
+        .room-card .img-wrap { height:200px; overflow:hidden; }
+        .room-card .img-wrap img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s; }
+        .room-card:hover .img-wrap img { transform:scale(1.05); }
+        .room-card .rb { padding:1.4rem; }
+        .room-card h5 { font-family:'Cormorant Garamond',serif; color:var(--brown); font-size:1.2rem; margin-bottom:0.4rem; }
+        .room-card .room-price { color:var(--gold); font-family:'Cormorant Garamond',serif; font-size:1.1rem; margin-bottom:0.6rem; }
+        .room-card .amenities { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:1rem; }
+        .room-card .amenities span { font-size:0.7rem; background:#f5ede0; color:var(--brown); padding:0.18rem 0.5rem; }
 
-		.carousel-inner .carousel-item-start.active, 
-		.carousel-inner .carousel-item-prev {
-			transform: translateX(-25%);
-		}
-	}
+        /* CAROUSEL SECTION */
+        .carousel-section { padding:90px 0; }
+        .carousel-inner img { height:420px; object-fit:cover; }
+        .carousel-caption { background:linear-gradient(transparent, rgba(20,10,5,0.8)); padding:2rem; text-align:left; }
+        .carousel-caption h3 { font-family:'Cormorant Garamond',serif; font-size:2rem; }
+        .carousel-caption p { font-size:0.9rem; color:#e8d5b7; }
+        .carousel-control-prev-icon,.carousel-control-next-icon { background-color:var(--brown); padding:1.2rem; border-radius:50%; }
 
-	.carousel-inner .carousel-item-end,
-	.carousel-inner .carousel-item-start { 
-		transform: translateX(0);
-	}
-    .btn:hover{
-        color: orange;
-        background-color: black;
-    }
-    .navbar-nav .nav-link:hover {
-    color: orange; 
-}
+        /* CONTACT BAND */
+        .contact-band { background:var(--brown); padding:70px 0; }
+        .contact-form .form-control,.contact-form .form-select { border:1px solid #6a5040; background:#3a2a1a; color:#e8d5b7; font-family:'Jost',sans-serif; border-radius:2px; padding:0.75rem 1rem; }
+        .contact-form .form-control::placeholder { color:#8a7060; }
+        .contact-form .form-control:focus,.contact-form .form-select:focus { border-color:var(--gold); box-shadow:none; }
+        .contact-form .form-label { font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#c4a882; }
+        .btn-submit { background:var(--gold); color:var(--brown); border:none; padding:0.8rem 2.5rem; font-family:'Jost',sans-serif; font-size:0.85rem; letter-spacing:0.12em; text-transform:uppercase; font-weight:700; border-radius:2px; transition:all 0.3s; width:100%; }
+        .btn-submit:hover { background:#fff; }
 
-	  </style>
+        footer { background:var(--dark); padding:60px 0 30px; }
+        footer h6 { font-family:'Cormorant Garamond',serif; font-size:1.1rem; color:var(--gold); margin-bottom:1.2rem; }
+        footer p, footer a { font-size:0.85rem; color:#9a8060; text-decoration:none; line-height:2; }
+        footer a:hover { color:var(--gold); }
+        .social-circle { width:36px; height:36px; border:1px solid #5a4a3a; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; color:#9a8060; font-size:0.85rem; margin-right:0.4rem; transition:all 0.3s; }
+        .social-circle:hover { background:var(--gold); border-color:var(--gold); color:var(--brown); }
+        .footer-bottom { border-top:1px solid #2a1e12; margin-top:40px; padding-top:20px; text-align:center; font-size:0.8rem; color:#5a4a3a; }
+    </style>
 </head>
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-expand-md navbar-light">
-            <a href="index.html"><img src="image\ogo-design.jpeg" style="width: 100px; height: 100px;  mix-blend-mode: darken" class="img-thumbnail rounded-circle"></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar">
-            <span class="navbar-toggler-icon"></span>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand" href="index.html"><img src="image/ogo-design.jpeg" alt="Logo"></a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon" style="filter:invert(1)"></span>
         </button>
-        <div class="collapse navbar-collapse " id="navbar">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#justlisted">New</a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-center gap-1">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Stay Types</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="villa.html">Villa</a></li>
+                        <li><a class="dropdown-item" href="house.html">House</a></li>
+                        <li><a class="dropdown-item" href="Cottage.html">Cottage</a></li>
+                        <li><a class="dropdown-item" href="chalet.html">Chalet</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#room">Roomes</a>
-                </li>
-                
-                <li class="nav-item">
-                    <a class="nav-link" href="#contact">Contact</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="explore.html">Explore</a></li>
+                <li class="nav-item"><a class="nav-link active" href="more.html">More</a></li>
+                <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item ms-2"><a class="nav-link btn-login" href="#">Login</a></li>
             </ul>
         </div>
-    </nav>
     </div>
-<div class="container bg-success  text-white text-center mt-4 py-5 ">
-            <h1>Welcome to India Home Stay</h1>
-            <p class="text-center">"Experience the true essence of India with our home stays. Our welcoming atmosphere and personalized service make every guest feel at home, ensuring a memorable stay filled with warmth and hospitality."</p>
-            <a href="#" class="btn btn-light btn-lg">Book Now</a>
-        </div>
-        <!--  -->
-	  <div class="container  my-3   bg-success-subtle">
-        <div class="row mx-auto my-auto justify-content-center">
-            <h4 class="card-title">
-                          Explore India
-                        </h4>
-                        <p>Discover India's breathtaking landscapes and rich culture. From the serene beaches of Goa to the misty hills of Munnar, each destination offers unique experiences waiting to be explored. Let us guide you on your journey through this incredible country.</p>
-            <div id="recipeCarousel_03" class="carousel carousel_03 " data-bs-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                    <div class="carousel-item ">
-                        <div class="col-md-3  p-2">
-                            <div class="card">
-                                <div class="card-img">
-                                   <a href="#"> <img src="image\goa.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Goa</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    <div class="carousel-item  carousel-item_03">
-                        <div class="col-md-3 p-2">
-                            <div class="card">
-                                <div class="card-img">
-                                   <a href="#"> <img src="image\munnarjpg.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Munnar</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item active carousel-item_03">
-                        <div class="col-md-3 p-2">
-                            <div class="card">
-                                <div class="card-img">
-                                   <a href="#"> <img src="image\lonavala.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Lonavala</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="carousel-item  carousel-item_03">
-                        <div class="col-md-3 p-2">
-                            <div class="card">
-                               <div class="card-img">
-                                   <a href="#"> <img src="image\oty.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Ooty</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="carousel-item  carousel-item_03">
-                        <div class="col-md-3 p-2">
-                            <div class="card">
-                                <div class="card-img">
-                                   <a href="#"> <img src="image\Vagamon.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Vagamon</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="carousel-item  carousel-item_03">
-                        <div class="col-md-3 p-2">
-                            <div class="card">
-                               <div class="card-img">
-                                   <a href="#"> <img src="image\Wayanad.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Wayanad</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                     <div class="carousel-item  carousel-item_03">
-                        <div class="col-md-3 p-2">
-                            <div class="card">
-                                <div class="card-img">
-                                   <a href="#"> <img src="image\Coonoorjpg.jpg" class="img-fluid " style=" height: 200px; "></a>
-                                </div>                              
-                               <a href="" style="text-decoration: none; color: black;"> <h5  style="box-shadow: 10px 10px 20px 5px grey; ">Coonoor</h5></a>
-                            </div>
-                        </div>
-                    </div>
-                     
-                     
-                </div>
-                <a class="carousel-control-prev bg-transparent w-aut" href="#recipeCarousel_03" role="button" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                </a>
-                <a class="carousel-control-next bg-transparent w-aut" href="#recipeCarousel_03" role="button" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                </a>
-            </div>
-            
-        </div>
-        </div>      
-    </div>
+</nav>
 
+<!-- HERO -->
+<section class="page-hero">
+    <span class="label">New Additions Every Week</span>
+    <h1>More Stays</h1>
+    <p>Discover freshly listed homestays — handpicked, verified, and ready to welcome you</p>
+    <div class="hero-line"></div>
+</section>
 
-    <<div class="container" id="justlisted">
-     <h1 class="text-center ">Just Listed</h1>
-   <p class="text-center ps-3 ">Check out our newly listed properties, each selected for its charm and comfort. Whether you're seeking adventure or relaxation, our home stays provide the perfect base for your explorations in the lap of nature.</p>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (28).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4>Joshimath</h4>
-                        <h5 class="card-subtitle text-muted ">
-                            <p>Lap Of Gods Home Stay.....</p>
-                        </h5>
-                         <button class="btn btn-danger text-white"> ₹1,599 per night</button>
+<!-- JUST LISTED -->
+<section class="listed-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-label">Newly Added</span>
+            <h2 class="section-title">Just Listed</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="listed-card">
+                    <div class="img-wrap">
+                        <img src="image/download (1).jpeg" alt="">
+                        <span class="new-badge">New</span>
+                        <span class="price-badge">₹3,800/night</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Himalayan Pine Retreat</h5>
+                        <div class="location"><i class="fa-solid fa-location-dot me-1" style="color:var(--gold)"></i>Shimla, Himachal Pradesh</div>
+                        <div class="star-row">★★★★★ <span style="color:#9a8060;margin-left:4px;">5.0 · 12 reviews</span></div>
+                        <p>Perched among pine forests with panoramic views of snow-capped peaks. Cozy interiors, fireplace and home-cooked Himachali meals.</p>
+                        <a href="payment.html" class="btn-book">Book Now</a>
+                        <a href="explore.html" class="btn-more">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (29).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4>Sikkim</h4>
-                        <h5 class="card-subtitle text-muted">
-                            <p>Treditional Home Stay.......</p>
-                        </h5>
-                         <button class="btn btn-danger text-white"> ₹2,999 per night</button>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="listed-card">
+                    <div class="img-wrap">
+                        <img src="image/download (2).jpeg" alt="">
+                        <span class="new-badge">New</span>
+                        <span class="price-badge">₹2,600/night</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Backwater Bliss House</h5>
+                        <div class="location"><i class="fa-solid fa-location-dot me-1" style="color:var(--gold)"></i>Alleppey, Kerala</div>
+                        <div class="star-row">★★★★★ <span style="color:#9a8060;margin-left:4px;">4.9 · 8 reviews</span></div>
+                        <p>A traditional Kerala house on the backwaters with houseboat access, boat rides and authentic Sadya meals.</p>
+                        <a href="payment.html" class="btn-book">Book Now</a>
+                        <a href="explore.html" class="btn-more">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (30).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px;">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4>Manali </h4>
-                        <h5 class="card-subtitle text-muted">
-                          <p> View Home Stay....</p>
-                        </h5>
-                         <button class="btn btn-danger text-white"> ₹2,299 per night</button>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="listed-card">
+                    <div class="img-wrap">
+                        <img src="image/download (4).jpeg" alt="">
+                        <span class="new-badge">New</span>
+                        <span class="price-badge">₹4,500/night</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Darjeeling Tea Estate Villa</h5>
+                        <div class="location"><i class="fa-solid fa-location-dot me-1" style="color:var(--gold)"></i>Darjeeling, West Bengal</div>
+                        <div class="star-row">★★★★☆ <span style="color:#9a8060;margin-left:4px;">4.7 · 6 reviews</span></div>
+                        <p>Wake up to morning mist rolling over tea gardens, with Kanchenjunga visible on clear days. Tea tasting tours included.</p>
+                        <a href="payment.html" class="btn-book">Book Now</a>
+                        <a href="explore.html" class="btn-more">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (31).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px">
-                <div class="card-body">
-                    <div class="card-title">
-                        <h4>Coonoor</h4>
-                        <h5 class="card-subtitle text-muted">
-                           <p> Sun Sine Home Stay....</p>
-                        </h5>
-                        <button class="btn btn-danger text-white"> ₹1,999 per night</button>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="0">
+                <div class="listed-card">
+                    <div class="img-wrap">
+                        <img src="image/download (13).jpeg" alt="">
+                        <span class="new-badge">New</span>
+                        <span class="price-badge">₹3,100/night</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Goan Spice Garden Cottage</h5>
+                        <div class="location"><i class="fa-solid fa-location-dot me-1" style="color:var(--gold)"></i>Ponda, Goa</div>
+                        <div class="star-row">★★★★★ <span style="color:#9a8060;margin-left:4px;">4.8 · 15 reviews</span></div>
+                        <p>A quaint Portuguese-style cottage within a spice plantation — perfect for nature lovers, with farm-to-table cooking experiences.</p>
+                        <a href="payment.html" class="btn-book">Book Now</a>
+                        <a href="explore.html" class="btn-more">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
-       
-        
-       
-    </div>
-</div>
-
-    <!--  -->
-    <div class="container mt-5" id="room">
-     <h1 class="text-center">Rooms & Suites</h1>
-   <p class="text-center">Choose from a variety of rooms designed to cater to your needs. Whether you're traveling solo, as a couple, or with family, our accommodations offer the ideal blend of comfort and style, ensuring a restful night's sleep after a day of exploration.</p>
-    <div class="row">
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (20).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px">
-                <div class="card-body">
-                    <div class="text-center">
-                        <h4>Bunk Bed Rooms</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="listed-card">
+                    <div class="img-wrap">
+                        <img src="image/download (14).jpeg" alt="">
+                        <span class="new-badge">New</span>
+                        <span class="price-badge">₹2,900/night</span>
+                    </div>
+                    <div class="card-body">
+                        <h5>Orchha Heritage Haveli</h5>
+                        <div class="location"><i class="fa-solid fa-location-dot me-1" style="color:var(--gold)"></i>Orchha, Madhya Pradesh</div>
+                        <div class="star-row">★★★★☆ <span style="color:#9a8060;margin-left:4px;">4.6 · 9 reviews</span></div>
+                        <p>Step into history at a 200-year-old restored haveli with carved wooden windows, courtyards and stories in every wall.</p>
+                        <a href="payment.html" class="btn-book">Book Now</a>
+                        <a href="explore.html" class="btn-more">Details</a>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (21).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4> Double Bedroom</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                  <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="listed-card">
+                    <div class="img-wrap">
+                        <img src="image/download (6).jpeg" alt="">
+                        <span class="new-badge">New</span>
+                        <span class="price-badge">₹5,200/night</span>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (22).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px;">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4>Family room</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (23).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4>Single bed room</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (24).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px;">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4>Twin bed room</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (25).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px;">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4>Triple room</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (26).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px;">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4>Quad room</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-3">
-            <div class="card">
-                <img src="image\download (27).jpeg" style="box-shadow: 10px 10px 20px 5px grey; height: 200px;">
-                <div class="card-body">
-                    <div class="card-title text-center">
-                        <h4>Standard room</h4>
-                        <button class="btn btn-info "style="border-radius: 10px;" >
-                 Book Now
-                </button>
-                <button class="btn  "style="border-radius: 10px; border: 1px solid black;" >
-                Read More
-                </button>
+                    <div class="card-body">
+                        <h5>Araku Valley Treehouse</h5>
+                        <div class="location"><i class="fa-solid fa-location-dot me-1" style="color:var(--gold)"></i>Araku, Andhra Pradesh</div>
+                        <div class="star-row">★★★★★ <span style="color:#9a8060;margin-left:4px;">5.0 · 4 reviews</span></div>
+                        <p>An extraordinary treehouse nestled among coffee plantations in the Eastern Ghats — a truly one-of-a-kind experience.</p>
+                        <a href="payment.html" class="btn-book">Book Now</a>
+                        <a href="explore.html" class="btn-more">Details</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-</div>
-    <div class="container mt-5" id="contact">
-        <h1 class="text-center">Contact Us</h1>
-        <p class="text-center">We'd love to hear from you! Reach out with any questions or comments about your stay.</p>
-        <form class="form-control" method="POST">
-            <div class="form-group">
-                <label for="name">Name:</label>
-                <input type="text" class="form-control" id="name" name="name" autocomplete="name" required>
+</section>
+
+<!-- ROOM TYPES -->
+<section class="rooms-section">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <span class="section-label">Accommodation</span>
+            <h2 class="section-title">Room Types Available</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="0">
+                <div class="room-card">
+                    <div class="img-wrap"><img src="image/download (7).jpeg" alt="Single Room"></div>
+                    <div class="rb">
+                        <h5>Single Room</h5>
+                        <div class="room-price">₹2,500 / night</div>
+                        <div class="amenities"><span>WiFi</span><span>AC</span><span>Attached Bath</span></div>
+                        <p style="font-size:0.85rem;color:#6a5a4a;margin-bottom:1rem;">Cozy room perfect for solo travelers with all essential comforts.</p>
+                        <a href="payment.html" class="btn-book">Book</a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" autocomplete="email" required>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="80">
+                <div class="room-card">
+                    <div class="img-wrap"><img src="image/download (8).jpeg" alt="Double Room"></div>
+                    <div class="rb">
+                        <h5>Double Room</h5>
+                        <div class="room-price">₹3,800 / night</div>
+                        <div class="amenities"><span>WiFi</span><span>AC</span><span>King Bed</span><span>TV</span></div>
+                        <p style="font-size:0.85rem;color:#6a5a4a;margin-bottom:1rem;">Spacious double room ideal for couples with premium bedding.</p>
+                        <a href="payment.html" class="btn-book">Book</a>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="160">
+                <div class="room-card">
+                    <div class="img-wrap"><img src="image/download (9).jpeg" alt="Twin Room"></div>
+                    <div class="rb">
+                        <h5>Twin Room</h5>
+                        <div class="room-price">₹4,200 / night</div>
+                        <div class="amenities"><span>WiFi</span><span>2 Beds</span><span>Balcony</span></div>
+                        <p style="font-size:0.85rem;color:#6a5a4a;margin-bottom:1rem;">Two separate beds — great for friends or siblings traveling together.</p>
+                        <a href="payment.html" class="btn-book">Book</a>
+                    </div>
+                </div>
             </div>
-            <div class="text-center mt-2">
-                <button type="submit" class="btn btn-primary btn-block">Send Message</button>
+            <div class="col-md-3" data-aos="fade-up" data-aos-delay="240">
+                <div class="room-card">
+                    <div class="img-wrap"><img src="image/download (10).jpeg" alt="Family Room"></div>
+                    <div class="rb">
+                        <h5>Family Room</h5>
+                        <div class="room-price">₹5,500 / night</div>
+                        <div class="amenities"><span>WiFi</span><span>4 Guests</span><span>Kitchen</span><span>Garden</span></div>
+                        <p style="font-size:0.85rem;color:#6a5a4a;margin-bottom:1rem;">Large family room with multiple beds, a kitchenette and outdoor space.</p>
+                        <a href="payment.html" class="btn-book">Book</a>
+                    </div>
+                </div>
             </div>
-        </form>
-        <div class="text-center mt-4">
-            <h5>Follow Us</h5>
-            <a href="https://www.instagram.com/" target="_blank">
-                <i class="fa-brands fa-instagram" style="color: #e5e7eb; font-size: 50px;"></i>
-            </a>
-            <a href="https://www.facebook.com/" target="_blank">
-                <i class="fa-brands fa-facebook" style="color: #e4e7ec; font-size: 50px;"></i>
-            </a>
         </div>
     </div>
+</section>
 
-</body>
-<script type="text/javascript">
-    let items_2 = document.querySelectorAll('.carousel_03 .carousel-item_03')
+<!-- CAROUSEL EXPLORE -->
+<section class="carousel-section">
+    <div class="container">
+        <div class="text-center mb-4" data-aos="fade-up">
+            <span class="section-label">Visual Tour</span>
+            <h2 class="section-title">A Glimpse of What Awaits</h2>
+        </div>
+        <div id="exploreCarousel" class="carousel slide" data-bs-ride="carousel" data-aos="fade-up">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="image/download (1).jpeg" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Mountains of the North</h3>
+                        <p>Snow-capped peaks, pine forests and warm Pahadi hospitality</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="image/download (2).jpeg" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Backwaters of Kerala</h3>
+                        <p>Tranquil waterways, coconut palms and authentic South Indian culture</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="image/download (4).jpeg" class="d-block w-100" alt="">
+                    <div class="carousel-caption d-none d-md-block">
+                        <h3>Tea Gardens of the East</h3>
+                        <p>Misty hills, lush tea estates and stories steeped in colonial history</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#exploreCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#exploreCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+    </div>
+</section>
 
-        items_2.forEach((el) => {
-            const minPerSlide = 4
-            let next = el.nextElementSibling
-            for (var i=1; i<minPerSlide; i++) {
-                if (!next) {
-            // wrap carousel by using first child
-            next = items_2[0]
-        }
-        let cloneChild = next.cloneNode(true)
-        el.appendChild(cloneChild.children[0])
-        next = next.nextElementSibling
-    }
-})
+<!-- CONTACT BAND -->
+<section class="contact-band">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5" data-aos="fade-right">
+                <span class="section-label" style="color:var(--gold)">Quick Enquiry</span>
+                <h2 style="font-family:'Cormorant Garamond',serif;color:#fff;font-size:clamp(2rem,3.5vw,2.8rem);margin-bottom:1rem;">Can't Find What You're Looking For?</h2>
+                <p style="color:#c4a882;font-size:0.95rem;line-height:1.8;">Tell us your travel dates, preferred region and budget — our team will personally find the perfect homestay for you within 24 hours.</p>
+                <div class="d-flex gap-3 mt-3 flex-wrap">
+                    <div style="text-align:center;">
+                        <div style="font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.8rem;font-weight:700;">500+</div>
+                        <div style="font-size:0.75rem;color:#9a8060;letter-spacing:0.1em;">Properties</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.8rem;font-weight:700;">24hr</div>
+                        <div style="font-size:0.75rem;color:#9a8060;letter-spacing:0.1em;">Response</div>
+                    </div>
+                    <div style="text-align:center;">
+                        <div style="font-family:'Cormorant Garamond',serif;color:var(--gold);font-size:1.8rem;font-weight:700;">Free</div>
+                        <div style="font-size:0.75rem;color:#9a8060;letter-spacing:0.1em;">Consultation</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7" data-aos="fade-left">
+                <form class="contact-form">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Your Name</label>
+                            <input type="text" class="form-control" placeholder="Full name" autocomplete="name">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Phone / Email</label>
+                            <input type="text" class="form-control" placeholder="Contact info">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Preferred Region</label>
+                            <select class="form-select">
+                                <option>Select region</option>
+                                <option>North India</option>
+                                <option>South India</option>
+                                <option>East India</option>
+                                <option>West India</option>
+                                <option>Central India</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Travel Dates</label>
+                            <input type="text" class="form-control" placeholder="e.g. Dec 20 – Dec 25">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" rows="3" placeholder="Budget, group size, special requirements..."></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn-submit">Send Enquiry</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <img src="image/ogo-design.jpeg" style="width:60px;height:60px;border-radius:50%;mix-blend-mode:lighten;margin-bottom:1rem;" alt="Logo">
+                <h6>All India Homestay</h6>
+                <p>Connecting travelers with authentic Indian homes across 28 states. Experience India the way locals do.</p>
+                <div class="mt-3">
+                    <a href="https://www.instagram.com/" target="_blank" class="social-circle"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="https://www.facebook.com/" target="_blank" class="social-circle"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="social-circle"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="social-circle"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="col-6 col-lg-2 offset-lg-1">
+                <h6>Explore</h6>
+                <a href="index.html" class="d-block">Home</a>
+                <a href="explore.html" class="d-block">Destinations</a>
+                <a href="more.html" class="d-block">Rooms</a>
+                <a href="about.html" class="d-block">About Us</a>
+                <a href="contact.html" class="d-block">Contact</a>
+            </div>
+            <div class="col-6 col-lg-2">
+                <h6>Stay Types</h6>
+                <a href="villa.html" class="d-block">Villa</a>
+                <a href="house.html" class="d-block">House</a>
+                <a href="Cottage.html" class="d-block">Cottage</a>
+                <a href="chalet.html" class="d-block">Chalet</a>
+            </div>
+            <div class="col-lg-3">
+                <h6>Contact</h6>
+                <p><i class="fa-solid fa-location-dot me-2" style="color:var(--gold)"></i>123, Heritage Lane, New Delhi 110001</p>
+                <p><i class="fa-solid fa-phone me-2" style="color:var(--gold)"></i>+91 98765 43210</p>
+                <p><i class="fa-solid fa-envelope me-2" style="color:var(--gold)"></i>info@allindiahomestay.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">&copy; 2024 All India Homestay. All rights reserved.</div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+    AOS.init({ duration:800, once:true, offset:80 });
+    window.addEventListener('scroll', () => {
+        document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+    });
 </script>
-
- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

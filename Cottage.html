@@ -1,189 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <title>Cottage Homestay</title>
-    <style>
-      body {
-        background-color: #f5f0e1;
-        color: #5a4630;
-        font-family: 'Georgia', serif;
-      }
-      .navbar {
-        background-color: #8b5a2b;
-      }
-      .navbar-brand img {
-        width: 80px;
-        height: 80px;
-      }
-      .nav-link {
-        color: #fff !important;
-        font-weight: bold;
-      }
-      .hero {
-       
-        color: black;
-        text-align: center;
-        padding: 50px 20px;
-        font-family: 'Brush Script MT', cursive;
-        font-size: 2rem;
-      }
-      .card {
-        border: none;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        background-color: #fff8e1;
-      }
-      .card img {
-        border-radius: 10px;
-        height: 250px;
-        object-fit: cover;
-      }
-      .section-title {
-        color: #8b5a2b;
-        text-align: center;
-        margin-bottom: 30px;
-        font-weight: bold;
-        font-size: 2rem;
-      }
-      .footer {
-        background-color: #8b5a2b;
-        color: white;
-        padding: 20px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">
-          <img src="image/ogo-design.jpeg" class="img-thumbnail rounded-circle" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="#accommodations">Accommodations</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#location">Location</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#contact">Contact</a>
-            </li>
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cottage — India HomeStay</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--brown:#8b5a2b;--brown-light:#b07540;--brown-dark:#5c3a1a;--gold:#d4a847;--gold-light:#f0c860;--cream:#fdf6ed;--cream2:#f5e9d6;--dark:#1c1008;--text:#3d2a12;--text-muted:#8a6a44}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+    body{font-family:'Jost',sans-serif;font-weight:300;background-color:var(--cream);color:var(--text);overflow-x:hidden}
+    ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--cream)}::-webkit-scrollbar-thumb{background:var(--brown);border-radius:3px}
+
+    /* ── NAVBAR (About style) ── */
+    .navbar-custom{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 5%;background:rgba(28,16,8,0.97);backdrop-filter:blur(12px);border-bottom:1px solid rgba(212,168,71,0.18);transition:all 0.3s}
+    .navbar-custom .navbar{min-height:74px}
+    .navbar-brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+    .navbar-brand img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid rgba(212,168,71,0.55);transition:transform 0.3s}
+    .navbar-brand img:hover{transform:scale(1.07)}
+    .navbar-brand span{font-family:'Cormorant Garamond',serif;font-size:1.18rem;font-weight:600;color:white;letter-spacing:0.5px;line-height:1.2}
+    .navbar-brand small{display:block;font-family:'Jost',sans-serif;font-size:0.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold);font-weight:400}
+    .nav-link{color:rgba(255,255,255,0.82)!important;font-family:'Jost',sans-serif;font-weight:500;font-size:0.76rem;letter-spacing:2px;text-transform:uppercase;padding:8px 0!important;margin:0 13px;position:relative;transition:color 0.3s!important}
+    .nav-link::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:center;transition:transform 0.35s}
+    .nav-link:hover,.nav-link.active{color:var(--gold)!important}
+    .nav-link:hover::after,.nav-link.active::after{transform:scaleX(1)}
+    .dropdown-menu{background:#1c1008;border:1px solid rgba(212,168,71,0.2);border-radius:12px;padding:10px;box-shadow:0 16px 48px rgba(0,0,0,0.4);margin-top:8px!important}
+    .dropdown-item{color:rgba(255,255,255,0.78)!important;font-family:'Jost',sans-serif;font-size:0.78rem;letter-spacing:1px;border-radius:7px;padding:9px 14px;transition:all 0.2s}
+    .dropdown-item:hover{background:rgba(212,168,71,0.12)!important;color:var(--gold)!important;padding-left:18px}
+    .btn-login{background:transparent!important;border:1.5px solid rgba(212,168,71,0.6)!important;color:var(--gold)!important;font-size:0.72rem!important;font-weight:600!important;letter-spacing:2px;text-transform:uppercase;padding:8px 22px!important;border-radius:30px!important;transition:all 0.3s!important;margin-left:8px!important}
+    .btn-login::after{display:none!important}
+    .btn-login:hover{background:var(--gold)!important;color:var(--dark)!important;border-color:var(--gold)!important}
+    .navbar-toggler{border:1px solid rgba(212,168,71,0.4);padding:7px 11px;border-radius:8px}
+    .navbar-toggler-icon{background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28212%2C168%2C71%2C0.95%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")}
+
+    /* ── FOOTER (About style) ── */
+    footer{background:linear-gradient(180deg,#1c1008 0%,#0e0804 100%);padding:70px 5% 30px;border-top:1px solid rgba(212,168,71,0.15)}
+    .footer-brand img{width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid rgba(212,168,71,0.4);margin-bottom:14px}
+    .footer-brand h6{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:600;color:white;margin-bottom:8px}
+    .footer-brand p{color:rgba(255,255,255,0.55);font-size:0.84rem;line-height:1.75;max-width:280px}
+    .footer-social{display:inline-flex;align-items:center;justify-content:center;width:36px;height:36px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.85rem;transition:all 0.3s;margin:0 4px}
+    .footer-social:hover{background:var(--gold);border-color:var(--gold);color:var(--dark)!important;transform:translateY(-2px)}
+    .footer-col-title{font-family:'Jost',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+    .footer-link{display:block;color:rgba(255,255,255,0.55)!important;font-family:'Jost',sans-serif;font-size:0.84rem;text-decoration:none;margin-bottom:10px;transition:all 0.25s}
+    .footer-link:hover{color:var(--gold)!important;padding-left:5px}
+    .footer-contact-item{display:flex;align-items:flex-start;gap:10px;margin-bottom:13px;color:rgba(255,255,255,0.55);font-size:0.84rem;line-height:1.5}
+    .footer-contact-item i{color:var(--gold);margin-top:2px;flex-shrink:0}
+    .footer-divider{border-top:1px solid rgba(255,255,255,0.07);margin:40px 0 24px}
+    .footer-bottom{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .footer-bottom p{color:rgba(255,255,255,0.35);font-size:0.78rem;margin:0}
+    .footer-bottom a{color:rgba(255,255,255,0.45)!important;font-size:0.78rem;text-decoration:none;transition:color 0.3s}
+    .footer-bottom a:hover{color:var(--gold)!important}
+
+    /* ── PAGE CONTENT ── */
+    .page-hero{margin-top:74px;background:linear-gradient(135deg,var(--dark) 0%,#2e1a08 100%);padding:90px 5%;text-align:center;position:relative;overflow:hidden}
+    .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,168,71,0.1) 0%,transparent 70%)}
+    .page-hero-label{font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;color:var(--gold);margin-bottom:14px;display:block;position:relative;animation:fadeUp 0.8s 0.2s both}
+    .page-hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,6vw,4.5rem);font-weight:600;color:white;line-height:1.1;margin-bottom:16px;position:relative;animation:fadeUp 0.9s 0.4s both}
+    .page-hero h1 em{color:var(--gold-light);font-style:italic}
+    .page-hero p{color:rgba(255,255,255,0.72);font-size:1rem;max-width:560px;margin:0 auto 32px;line-height:1.75;position:relative;animation:fadeUp 0.9s 0.55s both}
+    .btn-book{display:inline-block;background:var(--gold);color:var(--dark)!important;font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;padding:14px 40px;border-radius:40px;text-decoration:none;transition:background 0.3s,transform 0.2s,box-shadow 0.3s}
+    .btn-book:hover{background:var(--gold-light);transform:translateY(-2px);box-shadow:0 10px 30px rgba(212,168,71,0.4)}
+    .sec-label{font-size:0.7rem;letter-spacing:3.5px;text-transform:uppercase;color:var(--brown);margin-bottom:10px;font-weight:600;display:block}
+    .sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.5vw,2.9rem);font-weight:600;color:var(--brown-dark);line-height:1.2;margin-bottom:8px}
+    .sec-title em{color:var(--brown);font-style:italic}
+    .sec-sub{color:var(--text-muted);font-size:0.9rem;line-height:1.7;max-width:680px;margin:0 auto}
+    .cottages-section{padding:80px 5%;background:var(--cream2)}
+    .cottage-card{background:white;border-radius:20px;overflow:hidden;box-shadow:0 6px 28px rgba(92,58,26,0.12);transition:transform 0.35s,box-shadow 0.35s;height:100%}
+    .cottage-card:hover{transform:translateY(-7px);box-shadow:0 24px 55px rgba(92,58,26,0.22)}
+    .cottage-img{overflow:hidden;height:240px;position:relative}
+    .cottage-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s}
+    .cottage-card:hover .cottage-img img{transform:scale(1.07)}
+    .cottage-tag{position:absolute;top:14px;left:14px;background:var(--brown);color:white;font-size:0.65rem;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:20px}
+    .cottage-body{padding:24px 22px}
+    .cottage-body h5{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--brown-dark);margin-bottom:8px}
+    .cottage-body p{font-size:0.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:18px}
+    .features-section{padding:80px 5%;background:var(--cream)}
+    .feat-item{display:flex;gap:18px;align-items:flex-start;padding:24px;background:white;border-radius:16px;box-shadow:0 4px 18px rgba(92,58,26,0.08);border:1px solid rgba(139,90,43,0.08);transition:transform 0.3s,box-shadow 0.3s;height:100%}
+    .feat-item:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(92,58,26,0.15)}
+    .feat-icon{width:48px;height:48px;flex-shrink:0;background:rgba(212,168,71,0.12);border:1px solid rgba(212,168,71,0.25);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--gold)}
+    .feat-text h6{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-weight:600;color:var(--brown-dark);margin-bottom:5px}
+    .feat-text p{font-size:0.82rem;color:var(--text-muted);line-height:1.6;margin:0}
+    .testi-section{padding:80px 5%;background:var(--cream2)}
+    .testi-card{background:white;border-radius:18px;padding:30px 28px;border:1px solid rgba(139,90,43,0.1);height:100%;box-shadow:0 6px 24px rgba(92,58,26,0.08);transition:transform 0.3s}
+    .testi-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(92,58,26,0.16)}
+    .testi-stars{color:var(--gold);font-size:0.9rem;letter-spacing:2px;margin-bottom:16px}
+    .testi-text{font-size:0.9rem;color:var(--text-muted);line-height:1.75;font-style:italic;margin-bottom:22px;border-left:3px solid rgba(139,90,43,0.2);padding-left:14px}
+    .testi-name{font-weight:600;font-size:0.9rem;color:var(--brown-dark)}
+    .contact-section{padding:80px 5%;background:var(--cream)}
+    .contact-card{background:white;border-radius:20px;padding:44px 40px;box-shadow:0 8px 36px rgba(92,58,26,0.1);max-width:720px;margin:0 auto;border:1px solid rgba(139,90,43,0.08)}
+    .form-label{font-size:0.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-muted);font-weight:500;margin-bottom:7px;display:block}
+    .form-control{border:1.5px solid rgba(139,90,43,0.2);border-radius:10px;padding:12px 14px;background:var(--cream);font-family:'Jost',sans-serif;color:var(--text);font-size:0.9rem;transition:border-color 0.3s}
+    .form-control:focus{border-color:var(--brown);box-shadow:0 0 0 3px rgba(139,90,43,0.1);outline:none;background:white}
+    .form-group{margin-bottom:20px}
+    .btn-send{background:var(--brown);color:white;border:none;border-radius:10px;padding:13px 36px;font-family:'Jost',sans-serif;font-size:0.82rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;transition:background 0.3s;cursor:pointer}
+    .btn-send:hover{background:var(--brown-light)}
+    .cta-band{background:linear-gradient(135deg,var(--dark) 0%,#2e1a08 100%);padding:70px 5%;text-align:center;position:relative;overflow:hidden}
+    .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(212,168,71,0.1) 0%,transparent 60%)}
+    .cta-band h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);color:white;font-weight:400;margin-bottom:10px;position:relative}
+    .cta-band h2 em{color:var(--gold-light);font-style:italic}
+    .cta-band p{color:rgba(255,255,255,0.72);font-size:1rem;margin-bottom:28px;position:relative}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar-custom" id="mainNav">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="index.html">
+      <img src="image/ogo-design.jpeg" alt="Logo"/>
+      <div><span>All India Homestay<small>Authentic Living</small></span></div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" data-bs-toggle="dropdown">STAY TYPES</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="villa.html">Villa</a></li>
+            <li><a class="dropdown-item" href="house.html">House</a></li>
+            <li><a class="dropdown-item" href="Cottage.html">Cottage</a></li>
+            <li><a class="dropdown-item" href="chalet.html">Chalet</a></li>
           </ul>
-        </div>
-      </div>
-    </nav>
-
-    <div class="hero">
-      <h1>Welcome to Cottage Homestay</h1>
-      <p>Your perfect escape in nature awaits!</p>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="explore.html">EXPLORE</a></li>
+        <li class="nav-item"><a class="nav-link" href="more.html">MORE</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">ABOUT</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">CONTACT</a></li>
+        <li class="nav-item ms-lg-2"><a class="nav-link btn-login" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a></li>
+      </ul>
     </div>
+  </nav>
+</div>
 
-    <div class="container py-5" id="accommodations">
-      <h2 class="section-title">Accommodations</h2>
-      <div class="row g-4">
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="image/download (35).jpeg" class="card-img-top" alt="Cozy Cabin" />
-            <div class="card-body">
-              <h5 class="card-title">Cozy Cabin</h5>
-              <p>A charming retreat with stunning forest views.</p>
-            </div>
-          </div>
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="background:#1c1008;border:1px solid rgba(212,168,71,0.25);border-radius:20px;box-shadow:0 30px 80px rgba(0,0,0,0.5);">
+      <div class="modal-header" style="border-bottom:1px solid rgba(212,168,71,0.15);padding:28px 32px 18px;">
+        <div>
+          <h5 class="modal-title" style="font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:600;color:white;margin-bottom:2px;">Welcome Back</h5>
+          <p style="font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin:0;">Sign in to your account</p>
         </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="image/download (36).jpeg" class="card-img-top" alt="Family Lodge" />
-            <div class="card-body">
-              <h5 class="card-title">Family Lodge</h5>
-              <p>Spacious and perfect for family getaways.</p>
-            </div>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" style="padding:28px 32px 36px;">
+        <form>
+          <div class="mb-4">
+            <label style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px;">Email Address</label>
+            <input type="email" class="form-control" placeholder="your@email.com" style="background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,71,0.25);border-radius:10px;padding:12px 16px;color:white;font-family:'Jost',sans-serif;" required/>
           </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="image/download (37).jpeg" class="card-img-top" alt="Deluxe Suite" />
-            <div class="card-body">
-              <h5 class="card-title">Deluxe Suite</h5>
-              <p>Luxury stay with breathtaking views.</p>
-            </div>
+          <div class="mb-4">
+            <label style="font-size:0.7rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.5);display:block;margin-bottom:8px;">Password</label>
+            <input type="password" class="form-control" placeholder="••••••••" style="background:rgba(255,255,255,0.05);border:1px solid rgba(212,168,71,0.25);border-radius:10px;padding:12px 16px;color:white;font-family:'Jost',sans-serif;" required/>
           </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="image/download (38).jpeg" class="card-img-top" alt="Nature Retreat" />
-            <div class="card-body">
-              <h5 class="card-title">Nature Retreat</h5>
-              <p>Experience tranquility in a secluded nature retreat.</p>
-            </div>
+          <button type="submit" style="width:100%;background:var(--gold);border:none;border-radius:10px;padding:13px;font-family:'Jost',sans-serif;font-size:0.8rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--dark);cursor:pointer;">Login</button>
+          <div class="d-flex justify-content-between mt-3">
+            <a href="#" style="color:rgba(255,255,255,0.45);font-size:0.82rem;text-decoration:none;">Forgot Password?</a>
+            <a href="#" style="color:var(--gold);font-size:0.82rem;text-decoration:none;">Create Account</a>
           </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="image/download (39).jpeg" class="card-img-top" alt="Countryside House" />
-            <div class="card-body">
-              <h5 class="card-title">Countryside House</h5>
-              <p>Modern amenities and a spacious home for families.</p>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4 mb-4">
-          <div class="card">
-            <img src="image/download (40).jpeg" class="card-img-top" alt="Mountain House" />
-            <div class="card-body">
-              <h5 class="card-title">Mountain House</h5>
-              <p>A cozy cottage with breathtaking mountain views.</p>
-            </div>
-          </div>
-        </div>
+        </form>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="container py-5">
-        <h2 class="section-title">Cottage Homestay Experience</h2>
-        <p>
-          Cottage homestays offer a unique and charming lodging experience,
-          immersing guests in the beauty and culture of their surroundings. Often
-          set in picturesque rural areas, these cozy accommodations exude warmth
-          and character, reflecting local craftsmanship and traditions. Guests
-          enjoy a homey atmosphere with amenities like kitchens and gardens,
-          allowing for a comfortable and relaxed stay. The opportunity to connect
-          with local hosts enhances the experience, as they share insights about
-          the area, recommend hidden gems, and may even prepare homemade meals.
-          With their inviting ambiance and affordable rates, cottage homestays
-          provide a delightful way to experience a destination while fostering a
-          deeper connection with the local community and nature.
-        </p>
+<!-- HERO -->
+<div class="page-hero">
+  <span class="page-hero-label">✦ Cosy Retreats</span>
+  <h1>Stay in Our <em>Cosy Cottages</em></h1>
+  <p>Nestled in nature's embrace — our cottages offer the perfect blend of simplicity and serenity.</p>
+  <a href="#cottages" class="btn-book">Explore Cottages</a>
+</div>
+
+<!-- COTTAGES -->
+<section class="cottages-section" data-aos="fade-up" data-aos-duration="800" id="cottages">
+  <div class="container-fluid">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ Our Properties</span>
+      <h2 class="sec-title">Our <em>Cottages</em></h2>
+      <p class="sec-sub mt-2">Quaint and charming cottages tucked away in the most beautiful corners of India.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+        <div class="cottage-card">
+          <div class="cottage-img"><img src="image/download (47).jpeg" alt="Forest Cottage"/><span class="cottage-tag">✦ Forest</span></div>
+          <div class="cottage-body"><h5>Forest Cottage</h5><p>Tucked into the trees — a dreamy hideaway where birdsong is your morning alarm.</p><a href="payment.html" class="btn-book" style="padding:10px 28px;font-size:0.75rem;">Book Now</a></div>
+        </div>
       </div>
-    <div class="container text-center py-5" id="location">
-      <h2 class="section-title">Location</h2>
-      <p>Conveniently located near hiking trails and attractions.</p>
-      <iframe src="https://www.google.com/maps/embed?" width="100%" height="400" style="border: 0" allowfullscreen></iframe>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+        <div class="cottage-card">
+          <div class="cottage-img"><img src="image/download (48).jpeg" alt="Hillside Cottage"/><span class="cottage-tag" style="background:var(--gold);color:var(--dark);">✦ Hillside</span></div>
+          <div class="cottage-body"><h5>Hillside Cottage</h5><p>Perched on a gentle slope with panoramic valley views that will take your breath away.</p><a href="payment.html" class="btn-book" style="padding:10px 28px;font-size:0.75rem;">Book Now</a></div>
+        </div>
+      </div>
+      <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+        <div class="cottage-card">
+          <div class="cottage-img"><img src="image/download (49).jpeg" alt="Riverside Cottage"/><span class="cottage-tag" style="background:#3a7ca5;">✦ Riverside</span></div>
+          <div class="cottage-body"><h5>Riverside Cottage</h5><p>Fall asleep to the gentle sound of flowing water — pure relaxation by the riverbank.</p><a href="payment.html" class="btn-book" style="padding:10px 28px;font-size:0.75rem;">Book Now</a></div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-    <div class="container py-5 text-center" id="contact">
-      <h2 class="section-title">Contact Us</h2>
-      <p>Email: <a href="mailto:info@cottagehomestay.com">info@cottagehomestay.com</a></p>
-      <p>Phone: <a href="tel:1234567890">(123) 456-7890</a></p>
+<!-- FEATURES -->
+<section class="features-section" data-aos="fade-up" data-aos-duration="800">
+  <div class="container-fluid">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ Why Choose Us</span>
+      <h2 class="sec-title">Cottage <em>Highlights</em></h2>
+      <p class="sec-sub mt-2">Simple pleasures, thoughtfully arranged for the perfect cottage experience.</p>
     </div>
-
-    <div class="footer text-center">
-      <p>&copy; 2024 Cottage Homestay. All Rights Reserved.</p>
+    <div class="row g-4">
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="0"><div class="feat-item"><div class="feat-icon"><i class="fa fa-tree"></i></div><div class="feat-text"><h6>Nature Surroundings</h6><p>Every cottage is set amidst pristine natural landscapes — forests, hills or riverside.</p></div></div></div>
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="80"><div class="feat-item"><div class="feat-icon"><i class="fa fa-fire"></i></div><div class="feat-text"><h6>Bonfire Evenings</h6><p>Enjoy cosy evening bonfires under the stars with your loved ones.</p></div></div></div>
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="160"><div class="feat-item"><div class="feat-icon"><i class="fa fa-wifi"></i></div><div class="feat-text"><h6>WiFi Available</h6><p>Stay connected when needed with WiFi available in all our cottage properties.</p></div></div></div>
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="0"><div class="feat-item"><div class="feat-icon"><i class="fa fa-leaf"></i></div><div class="feat-text"><h6>Eco-Friendly</h6><p>Our cottages are built and operated with a deep respect for the natural environment.</p></div></div></div>
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="80"><div class="feat-item"><div class="feat-icon"><i class="fa fa-hiking"></i></div><div class="feat-text"><h6>Nature Trails</h6><p>Explore guided nature trails and treks starting right from your cottage doorstep.</p></div></div></div>
+      <div class="col-md-4 col-sm-6" data-aos="fade-up" data-aos-delay="160"><div class="feat-item"><div class="feat-icon"><i class="fa fa-concierge-bell"></i></div><div class="feat-text"><h6>24/7 Support</h6><p>Our support team is always on hand to ensure your stay is perfect.</p></div></div></div>
     </div>
+  </div>
+</section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+<!-- TESTIMONIALS -->
+<section class="testi-section" data-aos="fade-up" data-aos-duration="800">
+  <div class="container">
+    <div class="text-center mb-5"><span class="sec-label">✦ Guest Reviews</span><h2 class="sec-title">What Our <em>Guests Say</em></h2></div>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"The forest cottage was pure magic. Waking up to birdsong and fresh mountain air was an experience I'll never forget."</p><div class="testi-name">— Priya N.</div></div></div>
+      <div class="col-md-4"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"So peaceful and beautiful! The riverside setting was perfect and the hosts were wonderfully caring."</p><div class="testi-name">— David & Lisa</div></div></div>
+      <div class="col-md-4"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"A true escape from the city chaos. The hillside cottage had the most stunning views I've ever seen."</p><div class="testi-name">— Rohit M.</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band" data-aos="fade-up">
+  <h2>Book Your <em>Cottage</em> Today</h2>
+  <p>Limited availability — reserve your cosy nature retreat now.</p>
+  <a href="#contact" class="btn-book">Contact Us</a>
+</div>
+
+<!-- CONTACT -->
+<section class="contact-section" data-aos="fade-up" data-aos-duration="800" id="contact">
+  <div class="container">
+    <div class="text-center mb-5"><span class="sec-label">✦ Get In Touch</span><h2 class="sec-title">Contact <em>Us</em></h2><p class="sec-sub mt-2">We'd love to help you plan your perfect cottage getaway.</p></div>
+    <div class="contact-card">
+      <form>
+        <div class="row">
+          <div class="col-md-6"><div class="form-group"><label class="form-label">Your Name</label><input type="text" class="form-control" placeholder="Enter your name" required/></div></div>
+          <div class="col-md-6"><div class="form-group"><label class="form-label">Email Address</label><input type="email" class="form-control" placeholder="Enter your email" required/></div></div>
+        </div>
+        <div class="form-group"><label class="form-label">Message</label><textarea class="form-control" rows="4" placeholder="Tell us about your stay..." required></textarea></div>
+        <div class="text-center mt-4"><button type="submit" class="btn-send">Send Message</button></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container-fluid">
+    <div class="row g-5">
+      <div class="col-lg-4">
+        <div class="footer-brand">
+          <a href="index.html"><img src="image/ogo-design.jpeg" alt="Logo"/></a>
+          <h6>All India Homestay</h6>
+          <p>Connecting travelers with authentic Indian homes across 28 states. Experience India the way locals do — warm, real and unforgettable.</p>
+        </div>
+        <div class="mt-4">
+          <a href="https://www.instagram.com/" target="_blank" class="footer-social"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/" target="_blank" class="footer-social"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/" target="_blank" class="footer-social"><i class="fa-brands fa-x-twitter"></i></a>
+          <a href="#" class="footer-social"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-col-title">Explore</div>
+        <a href="index.html" class="footer-link">Home</a>
+        <a href="explore.html" class="footer-link">Destinations</a>
+        <a href="more.html" class="footer-link">Rooms</a>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <div class="footer-col-title">Stay Types</div>
+        <a href="villa.html" class="footer-link">Villa</a>
+        <a href="house.html" class="footer-link">House</a>
+        <a href="Cottage.html" class="footer-link">Cottage</a>
+        <a href="chalet.html" class="footer-link">Chalet</a>
+      </div>
+      <div class="col-lg-3">
+        <div class="footer-col-title">Contact Us</div>
+        <div class="footer-contact-item"><i class="fa-solid fa-location-dot"></i><span>123, Heritage Lane, New Delhi 110001</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-phone"></i><span>+91 98765 43210</span></div>
+        <div class="footer-contact-item"><i class="fa-solid fa-envelope"></i><span>info@allindiahomestay.com</span></div>
+      </div>
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 All India Homestay. All Rights Reserved.</p>
+      <div><a href="#">Privacy Policy</a> &nbsp;|&nbsp; <a href="#">Terms of Service</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>AOS.init({once:true});window.addEventListener('scroll',()=>{document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>50)});</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
