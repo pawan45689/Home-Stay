@@ -1,1116 +1,559 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home-Stay</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" type="text/css" href="css/home.css" />
-  </head>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Home-Stay</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --brown:       #8b5a2b;
+      --brown-light: #b07540;
+      --brown-dark:  #5c3a1a;
+      --gold:        #d4a847;
+      --gold-light:  #f0c860;
+      --cream:       #fdf6ed;
+      --cream2:      #f5e9d6;
+      --dark:        #1c1008;
+      --text:        #3d2a12;
+      --text-muted:  #8a6a44;
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Jost', sans-serif; font-weight: 300; background-color: var(--cream); color: var(--text); overflow-x: hidden; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--brown); border-radius: 3px; }
 
-  <body>
-    <div
-      class="container-fluid header fixed-top"
-      style="background-color: #8b5a2b"
-    >
-      <nav class="navbar navbar-expand-lg">
-        <a class="navbar-brand" href="index.html">
-          <img
-            src="image/ogo-design.jpeg"
-            style="width: 100px; height: 70px"
-            class="img-thumbnail rounded-circle"
-            alt="Logo"
-          />
-        </a>
+    /* NAVBAR */
+    .navbar-custom { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 0 4%; background: rgba(139,90,43,0.97); backdrop-filter: blur(10px); box-shadow: 0 2px 24px rgba(92,58,26,0.18); }
+    .navbar-custom .navbar { min-height: 72px; }
+    .navbar-brand img { width: 80px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(212,168,71,0.5); transition: transform 0.3s; }
+    .navbar-brand img:hover { transform: scale(1.06); }
+    .nav-link { color: rgba(255,255,255,0.88) !important; font-family: 'Jost', sans-serif; font-weight: 500; font-size: 0.78rem; letter-spacing: 1.8px; text-transform: uppercase; padding: 8px 0 !important; margin: 0 14px; position: relative; transition: color 0.3s !important; }
+    .nav-link::after { content: ''; position: absolute; bottom: 2px; left: 0; right: 0; height: 1px; background: var(--gold-light); transform: scaleX(0); transform-origin: center; transition: transform 0.3s; }
+    .nav-link:hover { color: var(--gold-light) !important; }
+    .nav-link:hover::after { transform: scaleX(1); }
+    .dropdown-menu { background: var(--brown-dark); border: 1px solid rgba(212,168,71,0.2); border-radius: 10px; padding: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.3); min-width: 180px; }
+    .dropdown-item { color: rgba(255,255,255,0.8) !important; font-size: 0.8rem; border-radius: 6px; padding: 8px 14px; transition: background 0.2s; }
+    .dropdown-item:hover { background: rgba(212,168,71,0.15) !important; color: var(--gold-light) !important; }
+    .btn-login { background: rgba(212,168,71,0.15) !important; border: 1px solid rgba(212,168,71,0.5) !important; color: var(--gold-light) !important; font-size: 0.78rem !important; letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600 !important; padding: 8px 22px !important; border-radius: 30px !important; transition: background 0.3s !important; margin: 0 !important; }
+    .btn-login::after { display: none !important; }
+    .btn-login:hover { background: var(--gold) !important; color: var(--dark) !important; }
+    .navbar-toggler { border: 1px solid rgba(212,168,71,0.4); padding: 6px 10px; }
+    .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255%2C255%2C255%2C0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
 
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
+    /* MODAL */
+    .modal-content { background: var(--cream); border: none; border-radius: 20px; box-shadow: 0 30px 80px rgba(92,58,26,0.25); }
+    .modal-header { border-bottom: 1px solid rgba(139,90,43,0.15); padding: 28px 32px 18px; }
+    .modal-title { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 600; color: var(--brown-dark); }
+    .modal-body { padding: 24px 32px 32px; }
+    .modal-body .form-label { font-size: 0.72rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); font-weight: 500; }
+    .modal-body .form-control { border: 1px solid rgba(139,90,43,0.25); border-radius: 10px; padding: 11px 14px; background: white; color: var(--text); font-family: 'Jost', sans-serif; transition: border-color 0.3s, box-shadow 0.3s; }
+    .modal-body .form-control:focus { border-color: var(--brown); box-shadow: 0 0 0 3px rgba(139,90,43,0.12); outline: none; }
+    .modal-body .btn-primary { background: var(--brown); border: none; border-radius: 10px; padding: 12px; font-family: 'Jost', sans-serif; font-size: 0.82rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; transition: background 0.3s; }
+    .modal-body .btn-primary:hover { background: var(--brown-light); }
+    .modal-body a { color: var(--brown); font-size: 0.85rem; }
 
-        <!-- Navigation Links Section -->
-        <div
-          class="collapse navbar-collapse justify-content-center"
-          id="navbarNav"
-        >
-          <ul class="navbar-nav">
-            <li class="nav-item ms-5">
-              <a class="nav-link" href="index.html">HOME</a>
-            </li>
-            <li class="nav-item ms-5">
-              <a class="nav-link" href="about-us.html">ABOUT US</a>
-            </li>
-            <li class="nav-item dropdown ms-5">
-              <a
-                class="nav-link dropdown-toggle"
-                href="#"
-                role="button"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                >HOMESTAYS</a
-              >
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">North India</a></li>
-                <li><a class="dropdown-item" href="#">South India</a></li>
-                <li><a class="dropdown-item" href="#">East India</a></li>
-                <li><a class="dropdown-item" href="#">West India</a></li>
-                <li><a class="dropdown-item" href="#">North East India</a></li>
-                <li><a class="dropdown-item" href="#">Central India</a></li>
-              </ul>
-            </li>
-            <li class="nav-item ms-5">
-              <a class="nav-link" href="#Gallery">Gallery</a>
-            </li>
-            <li class="nav-item ms-5">
-              <a class="nav-link" href="contact.html" target="_blank"
-                >Contact</a
-              >
-            </li>
-            <li class="nav-item ms-5">
-              <!-- Login Button that triggers the Modal -->
-              <button
-                class="btn btn-dark ms-3"
-                data-bs-toggle="modal"
-                data-bs-target="#loginModal"
-                style="border-radius: 10px"
-              >
-                Login
-              </button>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
+    /* BANNER */
+    .banner-wrap { margin-top: 72px; position: relative; }
+    .banner-wrap .carousel-item img { height: 88vh; object-fit: cover; width: 100%; filter: brightness(0.68); }
+    .banner-caption { position: absolute; bottom: 80px; left: 0; right: 0; text-align: center; z-index: 10; padding: 0 20px; animation: fadeUp 1s 0.3s both; }
+    .banner-caption h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 7vw, 5.5rem); font-weight: 600; color: white; line-height: 1.1; text-shadow: 0 4px 20px rgba(0,0,0,0.4); margin-bottom: 14px; }
+    .banner-caption h1 em { color: var(--gold-light); font-style: italic; }
+    .banner-caption p { color: rgba(255,255,255,0.85); font-size: 1.05rem; margin-bottom: 28px; }
+    .btn-book { display: inline-block; background: var(--gold); color: var(--dark) !important; font-family: 'Jost', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 14px 40px; border-radius: 40px; text-decoration: none; transition: background 0.3s, transform 0.2s, box-shadow 0.3s; }
+    .btn-book:hover { background: var(--gold-light); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212,168,71,0.4); }
+    .carousel-control-prev-icon, .carousel-control-next-icon { width: 44px; height: 44px; background-color: rgba(139,90,43,0.6); border-radius: 50%; background-size: 50%; }
+    .carousel-indicators [data-bs-target] { width: 28px; height: 3px; border-radius: 2px; background-color: rgba(255,255,255,0.5); border: none; transition: background 0.3s, width 0.3s; }
+    .carousel-indicators .active { background-color: var(--gold); width: 44px; }
 
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="loginModal"
-      tabindex="-1"
-      aria-labelledby="loginModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="loginModalLabel">Welcome Back!</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form class="form-control" method="post">
-              <div class="mb-3">
-                <label for="email" class="form-label">Email Address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  autocomplete="email"
-                  id="email"
-                  placeholder="Enter your email"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="password"
-                  placeholder="Enter your password"
-                  required
-                />
-              </div>
-              <div class="text-center mt-1">
-                <button type="submit" class="btn btn-primary w-100">
-                  Login
-                </button>
-              </div>
-              <div class="text-center mt-3">
-                <a href="#">Forgot Password?</a>
-              </div>
-              <div class="text-center mt-2">
-                <p>
-                  New to Our Homestay? <a href="#">Create an account today!</a>
-                </p>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    /* SEARCH */
+    .search-section { background: white; padding: 24px 0; box-shadow: 0 4px 20px rgba(92,58,26,0.07); }
+    .search-wrap { max-width: 560px; margin: 0 auto; position: relative; }
+    .search-wrap input { width: 100%; padding: 13px 20px 13px 48px; border-radius: 40px; border: 1.5px solid rgba(139,90,43,0.2); background: var(--cream); font-family: 'Jost', sans-serif; font-size: 0.9rem; color: var(--text); transition: border-color 0.3s, box-shadow 0.3s; outline: none; }
+    .search-wrap input:focus { border-color: var(--brown); box-shadow: 0 4px 20px rgba(139,90,43,0.15); }
+    .search-wrap .fa-search { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
 
-    <!-- Button to Trigger Modal -->
+    /* WELCOME BAND */
+    .welcome-band { background: linear-gradient(135deg, var(--dark) 0%, #2e1a08 100%); padding: 80px 5%; text-align: center; position: relative; overflow: hidden; }
+    .welcome-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(212,168,71,0.08) 0%, transparent 70%); }
+    .welcome-band h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.2rem, 5vw, 4rem); color: white; font-weight: 400; margin-bottom: 14px; position: relative; }
+    .welcome-band h2 span { color: var(--gold); font-style: italic; font-weight: 600; }
+    .welcome-band p { color: rgba(255,255,255,0.7); font-size: 1.05rem; max-width: 520px; margin: 0 auto 32px; line-height: 1.75; position: relative; }
 
-    <button
-      class="btn btn-dark ms-3"
-      data-bs-toggle="modal"
-      data-bs-target="#loginModal"
-      style="border-radius: 10px"
-    >
-      Login
+    /* SECTION HEADERS */
+    .sec-label { font-size: 0.7rem; letter-spacing: 3.5px; text-transform: uppercase; color: var(--brown); margin-bottom: 10px; font-weight: 600; display: block; }
+    .sec-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.9rem, 3.5vw, 2.9rem); font-weight: 600; color: var(--brown-dark); line-height: 1.2; margin-bottom: 8px; }
+    .sec-title em { color: var(--brown); font-style: italic; }
+    .sec-sub { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; }
+
+    /* DESTINATIONS */
+    .destinations-section { padding: 80px 5%; background: var(--cream2); }
+    .dest-header { display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 20px; margin-bottom: 44px; }
+    .btn-more { display: inline-block; background: transparent; border: 1.5px solid var(--brown); color: var(--brown); font-family: 'Jost', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; padding: 11px 28px; border-radius: 30px; text-decoration: none; transition: background 0.3s, color 0.3s; cursor: pointer; }
+    .btn-more:hover { background: var(--brown); color: white; }
+
+    /* Multi carousel cards */
+    #recipeCarousel_03 { padding-bottom: 16px; }
+    .carousel-item_03 .card { border: none; border-radius: 16px; overflow: hidden; box-shadow: 0 6px 24px rgba(92,58,26,0.12); transition: transform 0.3s, box-shadow 0.3s; margin: 8px; background: white; }
+    .carousel-item_03 .card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(92,58,26,0.2); }
+    .carousel-item_03 .card img { height: 190px; object-fit: cover; transition: transform 0.4s; }
+    .carousel-item_03 .card:hover img { transform: scale(1.05); }
+    .carousel-item_03 h5 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--brown-dark); padding: 12px 14px; box-shadow: none !important; margin: 0; text-align: center; }
+
+    /* BREAK BAND */
+    .break-band { background: linear-gradient(135deg, var(--brown-dark), #3d2010); padding: 60px 5%; text-align: center; position: relative; overflow: hidden; }
+    .break-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(212,168,71,0.1) 0%, transparent 60%); }
+    .break-band h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.8rem, 4vw, 3rem); color: white; font-weight: 400; margin-bottom: 10px; position: relative; }
+    .break-band p { color: rgba(255,255,255,0.72); font-size: 1rem; position: relative; }
+
+    /* ROOMS */
+    .rooms-section { padding: 80px 5%; background: var(--cream); }
+    .room-card { border-radius: 16px; overflow: hidden; position: relative; background: white; box-shadow: 0 6px 24px rgba(92,58,26,0.1); transition: transform 0.35s, box-shadow 0.35s; margin-bottom: 8px; }
+    .room-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(92,58,26,0.2); }
+    .room-img { position: relative; overflow: hidden; height: 200px; }
+    .room-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .room-card:hover .room-img img { transform: scale(1.07); }
+    .room-overlay { position: absolute; inset: 0; background: rgba(28,16,8,0.7); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .room-card:hover .room-overlay { opacity: 1; }
+    .room-overlay p { color: white; font-size: 1rem; font-weight: 500; margin: 2px 0; }
+    .room-overlay .price { color: var(--gold-light); font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; }
+    .room-info { padding: 16px 18px; }
+    .room-info h6 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--brown-dark); margin-bottom: 6px; }
+    .room-info p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; margin: 0; }
+    .room-price-badge { display: inline-block; background: var(--gold); color: var(--dark); font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 20px; margin-top: 10px; }
+
+    /* FACILITIES */
+    .facilities-section { padding: 80px 5%; background: var(--cream2); }
+    .fac-card { border-radius: 16px; overflow: hidden; position: relative; height: 280px; cursor: pointer; box-shadow: 0 6px 24px rgba(92,58,26,0.12); margin-bottom: 8px; }
+    .fac-bg { width: 100%; height: 100%; background-size: cover; background-position: center; transition: transform 0.5s; }
+    .fac-card:hover .fac-bg { transform: scale(1.08); }
+    .fac-dark { position: absolute; inset: 0; background: linear-gradient(to top, rgba(28,16,8,0.9) 30%, rgba(28,16,8,0.3) 100%); }
+    .fac-content { position: absolute; bottom: 0; left: 0; right: 0; padding: 24px; }
+    .fac-title { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; font-weight: 600; color: white; margin-bottom: 0; }
+    .fac-desc { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.6; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, margin-top 0.3s; }
+    .fac-card:hover .fac-desc { max-height: 100px; margin-top: 10px; }
+    .fac-parking { background-image: url('image/Parking.jpeg'); }
+    .fac-travel  { background-image: url('image/Travel.jpeg'); }
+    .fac-wifi    { background-image: url('image/wifi.jpeg'); }
+    .fac-food    { background-image: url('image/Food.jpeg'); }
+    .fac-camp    { background-image: url('image/camp.jpeg'); }
+    .fac-swim    { background-image: url('image/swim.jpeg'); }
+
+    /* TESTIMONIALS */
+    .testimonials-section { padding: 80px 5%; background: var(--cream); }
+    .testi-card { background: white; border-radius: 18px; padding: 30px 28px; border: 1px solid rgba(139,90,43,0.1); height: 100%; box-shadow: 0 6px 24px rgba(92,58,26,0.08); transition: transform 0.3s, box-shadow 0.3s; }
+    .testi-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(92,58,26,0.16); }
+    .testi-stars { color: var(--gold); font-size: 0.9rem; letter-spacing: 2px; margin-bottom: 16px; }
+    .testi-text { font-size: 0.9rem; color: var(--text-muted); line-height: 1.75; font-style: italic; margin-bottom: 22px; border-left: 3px solid rgba(139,90,43,0.2); padding-left: 14px; }
+    .testi-author { display: flex; align-items: center; gap: 12px; }
+    .testi-pic { width: 52px; height: 52px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(139,90,43,0.25); }
+    .testi-name { font-weight: 600; font-size: 0.9rem; color: var(--brown-dark); }
+
+    /* STAY TYPES */
+    .stay-types-section { padding: 80px 5%; background: var(--cream2); }
+    .stay-card { border-radius: 18px; overflow: hidden; position: relative; height: 300px; box-shadow: 0 8px 28px rgba(92,58,26,0.14); transition: transform 0.35s, box-shadow 0.35s; margin-bottom: 24px; cursor: pointer; }
+    .stay-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 22px 55px rgba(92,58,26,0.25); }
+    .stay-card img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+    .stay-card:hover img { transform: scale(1.07); }
+    .stay-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.48); display: flex; flex-direction: column; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.35s; padding: 20px; text-align: center; }
+    .stay-card:hover .stay-overlay { opacity: 1; }
+    .stay-overlay a { font-family: 'Cormorant Garamond', serif; font-size: 1.9rem; font-weight: 600; color: white; text-decoration: none; line-height: 1; }
+    .stay-overlay a:hover { color: var(--gold-light); }
+    .stay-overlay p { color: rgba(255,255,255,0.8); font-size: 0.85rem; margin-top: 8px; }
+
+    /* INSPIRATION */
+    .inspiration-section { padding: 80px 5%; background: var(--cream); }
+    .ins-img { width: 100%; max-width: 300px; height: 300px; object-fit: cover; clip-path: circle(46%); float: left; shape-outside: circle(45%); margin-right: 36px; margin-bottom: 16px; }
+    .ins-text { font-size: 0.95rem; color: var(--text-muted); line-height: 1.85; }
+    .ins-text::after { content: ''; display: block; clear: both; }
+
+    /* GALLERY */
+    .gallery-section { padding: 80px 5%; background: var(--cream2); }
+    .gallery-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 44px; }
+    .gallery-item { border-radius: 10px; overflow: hidden; cursor: pointer; position: relative; }
+    .gallery-item img { width: 100%; height: 130px; object-fit: cover; display: block; transition: transform 0.45s; }
+    .gallery-item:hover img { transform: scale(1.1); }
+    .gallery-item::after { content: '\f00e'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; inset: 0; background: rgba(139,90,43,0.65); color: white; font-size: 1.3rem; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s; }
+    .gallery-item:hover::after { opacity: 1; }
+
+    /* FOOTER */
+    footer { background: var(--brown); padding: 60px 5% 30px; }
+    .footer-title { font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: white; margin-bottom: 14px; }
+    .footer-divider { border-color: rgba(255,255,255,0.2); margin: 8px 0 16px; }
+    footer p { color: rgba(255,255,255,0.82); font-size: 0.88rem; line-height: 1.7; }
+    footer a { color: rgba(255,255,255,0.82) !important; text-decoration: none; transition: color 0.3s; }
+    footer a:hover { color: var(--gold-light) !important; }
+    .footer-logo-img { width: 100px; height: 100px; border-radius: 50%; border: 3px solid rgba(212,168,71,0.4); object-fit: cover; }
+    .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 50%; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: white; text-decoration: none; font-size: 0.9rem; transition: background 0.3s, color 0.3s; margin: 0 4px; }
+    .social-icon:hover { background: var(--gold); border-color: var(--gold); color: var(--dark) !important; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.12); padding-top: 20px; margin-top: 36px; }
+    .footer-bottom p { color: rgba(255,255,255,0.6); font-size: 0.8rem; margin: 0; }
+
+    /* CHAT */
+    .chat-widget { position: fixed; right: 16px; bottom: 16px; z-index: 999; }
+    .chat-widget img { width: 68px; height: 68px; border-radius: 50%; object-fit: cover; box-shadow: 0 6px 20px rgba(0,0,0,0.25); transition: transform 0.3s; cursor: pointer; }
+    .chat-widget img:hover { transform: scale(1.1); }
+
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+      .banner-wrap .carousel-item img { height: 55vh; }
+      .ins-img { float: none; display: block; margin: 0 auto 24px; clip-path: circle(50%); shape-outside: none; }
+    }
+    @media (max-width: 480px) { .gallery-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 767px) {
+      .carousel-inner .carousel-item > div { display: none; }
+      .carousel-inner .carousel-item > div:first-child { display: block; }
+    }
+    .carousel-inner .carousel-item.active, .carousel-inner .carousel-item-next, .carousel-inner .carousel-item-prev { display: flex; }
+    @media (min-width: 768px) {
+      .carousel-inner .carousel-item-end.active, .carousel-inner .carousel-item-next { transform: translateX(25%); }
+      .carousel-inner .carousel-item-start.active, .carousel-inner .carousel-item-prev { transform: translateX(-25%); }
+    }
+    .carousel-inner .carousel-item-end, .carousel-inner .carousel-item-start { transform: translateX(0); }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar-custom" id="mainNav">
+  <nav class="navbar navbar-expand-lg">
+    <a class="navbar-brand" href="index.html">
+      <img src="image/ogo-design.jpeg" alt="Logo" />
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
     </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav align-items-lg-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">HOME</a></li>
+        <li class="nav-item"><a class="nav-link" href="about-us.html">ABOUT US</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">HOMESTAYS</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">North India</a></li>
+            <li><a class="dropdown-item" href="#">South India</a></li>
+            <li><a class="dropdown-item" href="#">East India</a></li>
+            <li><a class="dropdown-item" href="#">West India</a></li>
+            <li><a class="dropdown-item" href="#">North East India</a></li>
+            <li><a class="dropdown-item" href="#">Central India</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="#gallery">GALLERY</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html" target="_blank">CONTACT</a></li>
+        <li class="nav-item ms-lg-3">
+          <a class="nav-link btn-login" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">LOGIN</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>
 
-    <!-- Banner -->
-    <div class="container-fluid" style="margin-top: 120px">
-      <div class="row py-3">
-        <div class="col">
-          <div id="mycarousel" class="carousel slide" data-bs-ride="carousel">
-            <ol class="carousel-indicators" style="list-style: none">
-              <li data-bs-target="#mycarousel" data-bs-slide-to="0"></li>
-              <li
-                data-bs-target="#mycarousel"
-                data-bs-slide-to="1"
-                class="active"
-              ></li>
-              <li data-bs-target="#mycarousel" data-bs-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-              <div class="carousel-item">
-                <img src="image\1.jpeg" class="d-block" />
-              </div>
-              <div class="carousel-item active">
-                <img src="image\2.jpeg" class="d-block w-100" height="100%" />
-              </div>
-              <div class="carousel-item">
-                <img src="image\3.jpeg" class="d-block w-100" height="100%" />
-              </div>
-            </div>
-            <a
-              href="#mycarousel"
-              class="carousel-control-prev"
-              data-bs-slide="prev"
-            >
-              <span class="carousel-control-prev-icon"></span>
-            </a>
-            <a
-              href="#mycarousel"
-              class="carousel-control-next"
-              data-bs-slide="next"
-            >
-              <span class="carousel-control-next-icon"></span>
-            </a>
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="loginModalLabel">Welcome Back!</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post">
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter your email" autocomplete="email" required />
           </div>
-        </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Enter your password" required />
+          </div>
+          <div class="text-center mt-3">
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </div>
+          <div class="text-center mt-3"><a href="#">Forgot Password?</a></div>
+          <div class="text-center mt-2">
+            <p style="font-size:0.85rem;color:var(--text-muted);">New to Our Homestay? <a href="#">Create an account today!</a></p>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="container mt-5">
-      <div class="row">
-        <div class="col-12 col-md-6 mx-auto">
-          <div class="search-bar">
-            <i class="fas fa-search"></i>
-            <input
-              type="text"
-              class="form-control"
-              placeholder="Search here..."
-            />
-          </div>
-        </div>
+<!-- BANNER -->
+<div class="banner-wrap">
+  <div id="mycarousel" class="carousel slide" data-bs-ride="carousel">
+    <ol class="carousel-indicators" style="list-style:none;">
+      <li data-bs-target="#mycarousel" data-bs-slide-to="0"></li>
+      <li data-bs-target="#mycarousel" data-bs-slide-to="1" class="active"></li>
+      <li data-bs-target="#mycarousel" data-bs-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner">
+      <div class="carousel-item">
+        <img src="image/1.jpeg" class="d-block w-100" alt="Slide 1" />
+      </div>
+      <div class="carousel-item active">
+        <img src="image/2.jpeg" class="d-block w-100" alt="Slide 2" />
+      </div>
+      <div class="carousel-item">
+        <img src="image/3.jpeg" class="d-block w-100" alt="Slide 3" />
       </div>
     </div>
+    <a href="#mycarousel" class="carousel-control-prev" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></a>
+    <a href="#mycarousel" class="carousel-control-next" data-bs-slide="next"><span class="carousel-control-next-icon"></span></a>
+  </div>
+  <div class="banner-caption">
+    <h1>Welcome to <em>India HomeStay</em></h1>
+    <p>Experience the warmth of Indian hospitality, surrounded by comfort and peace.</p>
+    <a href="payment.html" target="_blank" class="btn-book">Book Now</a>
+  </div>
+</div>
 
-    <!-- Explore india -->
-    <div
-      class="container-fluid text-white text-center mt-5 py-5"
-      style="background-color: rgba(33, 37, 41, 0.85)"
-    >
-      <h3 class="display-4 mb-3 hero">
-        Welcome to India
-        <span class="wel" style="color: #ffc107">Home Stay</span>
-      </h3>
-      <p class="lead mb-4">
-        Experience the warmth of Indian hospitality, surrounded-circle by
-        comfort and peace.
+<!-- SEARCH -->
+<div class="search-section">
+  <div class="container">
+    <div class="search-wrap">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Search destinations, stay types..." />
+    </div>
+  </div>
+</div>
+
+<!-- WELCOME BAND -->
+<div class="welcome-band" data-aos="fade-up" data-aos-duration="700">
+  <h2>Welcome to India <span>Home Stay</span></h2>
+  <p>Experience the warmth of Indian hospitality, surrounded by comfort and peace.</p>
+  <a href="payment.html" target="_blank" class="btn-book">Book Now</a>
+</div>
+
+<!-- DESTINATIONS -->
+<section class="destinations-section" data-aos="fade-up" data-aos-duration="800" id="destinations">
+  <div class="container-fluid">
+    <div class="dest-header">
+      <div>
+        <span class="sec-label">✦ Popular Destinations</span>
+        <h2 class="sec-title">Explore <em>India</em></h2>
+        <p class="sec-sub">These popular destinations have a lot to offer</p>
+      </div>
+      <a href="more.html"><button class="btn-more">More Places</button></a>
+    </div>
+    <div id="recipeCarousel_03" class="carousel carousel_03" data-bs-ride="carousel">
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/goa.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Goa</h5></a></div></div>
+        </div>
+        <div class="carousel-item carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/munnar.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Munnar</h5></a></div></div>
+        </div>
+        <div class="carousel-item active carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/lonavala.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Lonavala</h5></a></div></div>
+        </div>
+        <div class="carousel-item carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/oty.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Ooty</h5></a></div></div>
+        </div>
+        <div class="carousel-item carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/Vagamon.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Vagamon</h5></a></div></div>
+        </div>
+        <div class="carousel-item carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/Wayanad.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Wayanad</h5></a></div></div>
+        </div>
+        <div class="carousel-item carousel-item_03">
+          <div class="col-md-2 p-2"><div class="card"><div class="card-img"><a href="#"><img src="image/Coonoorjpg.jpg" class="img-fluid" /></a></div><a href="" style="text-decoration:none;color:inherit"><h5>Coonoor</h5></a></div></div>
+        </div>
+      </div>
+      <a class="carousel-control-prev bg-transparent w-auto" href="#recipeCarousel_03" role="button" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></a>
+      <a class="carousel-control-next bg-transparent w-auto" href="#recipeCarousel_03" role="button" data-bs-slide="next"><span class="carousel-control-next-icon"></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- BREAK BAND -->
+<div class="break-band" data-aos="fade-up" data-aos-duration="700">
+  <h3>Spend a memorable break</h3>
+  <p>Relax, Refresh and get pampered amidst the landscapes of nature.</p>
+</div>
+
+<!-- ROOMS -->
+<section class="rooms-section" data-aos="fade-up" data-aos-duration="800" id="rooms">
+  <div class="container-fluid">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ Where You'll Stay</span>
+      <h2 class="sec-title">Explore HomeStay <em>Rooms</em></h2>
+    </div>
+    <div class="row">
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (1).jpeg" alt="Spacious Deluxe Room" /><div class="room-overlay"><p>Spacious Deluxe Room</p><p class="price">₹1,699 / night</p></div></div><div class="room-info"><h6>Spacious Deluxe Room</h6><p>Scenic views and modern amenities for a perfect retreat.</p><span class="room-price-badge">₹1,699 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (2).jpeg" alt="Luxury Suite" /><div class="room-overlay"><p>Luxury Suite</p><p class="price">₹2,699 / night</p></div></div><div class="room-info"><h6>Luxury Suite</h6><p>Unmatched comfort and privacy for a lavish stay.</p><span class="room-price-badge">₹2,699 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (8).jpeg" alt="Cozy Single Room" /><div class="room-overlay"><p>Cozy Single Room</p><p class="price">₹1,699 / night</p></div></div><div class="room-info"><h6>Cozy Single Room</h6><p>Perfect for solo travelers seeking comfort and tranquility.</p><span class="room-price-badge">₹1,699 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (4).jpeg" alt="Budget Room" /><div class="room-overlay"><p>Budget-Friendly Room</p><p class="price">₹999 / night</p></div></div><div class="room-info"><h6>Budget-Friendly Room</h6><p>Affordable and cozy, ideal for budget travelers.</p><span class="room-price-badge">₹999 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (5).jpeg" alt="Family Room" /><div class="room-overlay"><p>Family Room</p><p class="price">₹1,999 / night</p></div></div><div class="room-info"><h6>Family Room</h6><p>Spacious and comfortable for a perfect family getaway.</p><span class="room-price-badge">₹1,999 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (6).jpeg" alt="Garden View Room" /><div class="room-overlay"><p>Garden View Room</p><p class="price">₹1,999 / night</p></div></div><div class="room-info"><h6>Garden View Room</h6><p>Peaceful views of lush gardens from your cozy room.</p><span class="room-price-badge">₹1,999 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/download (7).jpeg" alt="Honeymoon Suite" /><div class="room-overlay"><p>Honeymoon Suite</p><p class="price">₹1,599 / night</p></div></div><div class="room-info"><h6>Honeymoon Suite</h6><p>A romantic space for newlyweds to relax and unwind.</p><span class="room-price-badge">₹1,599 / night</span></div></div></div>
+      <div class="col-md-3 col-sm-6 p-2"><div class="room-card"><div class="room-img"><img src="image/images (1).jpeg" alt="Mountain View Room" /><div class="room-overlay"><p>Mountain View Room</p><p class="price">₹2,599 / night</p></div></div><div class="room-info"><h6>Mountain View Room</h6><p>Wake up to stunning mountain views every morning.</p><span class="room-price-badge">₹2,599 / night</span></div></div></div>
+    </div>
+    <div class="text-center mt-4"><a href="Explore.html"><button class="btn-more">Explore More Rooms</button></a></div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="facilities-section" data-aos="fade-up" data-aos-duration="800" id="facilities">
+  <div class="container-fluid">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ What We Offer</span>
+      <h2 class="sec-title">Our <em>Facilities</em></h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-4 col-sm-6"><div class="fac-card"><div class="fac-bg fac-parking"></div><div class="fac-dark"></div><div class="fac-content"><h4 class="fac-title"><i class="fa fa-car me-2" style="color:var(--gold-light)"></i>Secured Parking</h4><p class="fac-desc">Rest easy with our secure parking, ensuring your vehicle is safe throughout your stay.</p></div></div></div>
+      <div class="col-md-4 col-sm-6"><div class="fac-card"><div class="fac-bg fac-travel"></div><div class="fac-dark"></div><div class="fac-content"><h4 class="fac-title"><i class="fa fa-map me-2" style="color:var(--gold-light)"></i>Travel Guide</h4><p class="fac-desc">Discover the best of the area with our comprehensive travel guide and local favorites.</p></div></div></div>
+      <div class="col-md-4 col-sm-6"><div class="fac-card"><div class="fac-bg fac-wifi"></div><div class="fac-dark"></div><div class="fac-content"><h4 class="fac-title"><i class="fa fa-wifi me-2" style="color:var(--gold-light)"></i>Free WiFi</h4><p class="fac-desc">Stay connected with complimentary Wi-Fi available throughout the property.</p></div></div></div>
+      <div class="col-md-4 col-sm-6"><div class="fac-card"><div class="fac-bg fac-food"></div><div class="fac-dark"></div><div class="fac-content"><h4 class="fac-title"><i class="fa fa-utensils me-2" style="color:var(--gold-light)"></i>Healthy Food</h4><p class="fac-desc">Delicious meals made from fresh, local ingredients that nourish your body.</p></div></div></div>
+      <div class="col-md-4 col-sm-6"><div class="fac-card"><div class="fac-bg fac-camp"></div><div class="fac-dark"></div><div class="fac-content"><h4 class="fac-title"><i class="fa fa-fire me-2" style="color:var(--gold-light)"></i>Campfire</h4><p class="fac-desc">Gather around our cozy campfire for unforgettable evenings under the stars.</p></div></div></div>
+      <div class="col-md-4 col-sm-6"><div class="fac-card"><div class="fac-bg fac-swim"></div><div class="fac-dark"></div><div class="fac-content"><h4 class="fac-title"><i class="fa fa-water me-2" style="color:var(--gold-light)"></i>Swimming</h4><p class="fac-desc">Enjoy refreshing swims in our crystal-clear pool surrounded by stunning views.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials-section" data-aos="fade-up" data-aos-duration="800">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ Guest Reviews</span>
+      <h2 class="sec-title">What Our <em>Guests Say</em></h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Staying at this home stay was an unforgettable experience! The hosts were warm and welcoming, making us feel at home. The rooms were clean, cozy, and beautifully decorated. We highly recommend this place!"</p><div class="testi-author"><img src="image/sara.jpeg" class="testi-pic" alt="Sarah" /><div><div class="testi-name">— Sarah</div></div></div></div></div>
+      <div class="col-md-4"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"Our stay here exceeded all expectations! The peaceful surroundings, along with thoughtful amenities, made for a perfect getaway. The home-cooked meals were a delightful bonus!"</p><div class="testi-author"><img src="image/emma.jpeg" class="testi-pic" alt="Emma" /><div><div class="testi-name">— Emma</div></div></div></div></div>
+      <div class="col-md-4"><div class="testi-card"><div class="testi-stars">★★★★★</div><p class="testi-text">"This home stay provided the perfect balance of comfort and adventure. It felt like staying with friends, and every detail was taken care of beautifully."</p><div class="testi-author"><img src="image/mark.jpeg" class="testi-pic" alt="Mark" /><div><div class="testi-name">— Mark</div></div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- STAY TYPES -->
+<section class="stay-types-section" data-aos="fade-up" data-aos-duration="800">
+  <div class="container-fluid">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ Your Style</span>
+      <h2 class="sec-title">Find Spaces That Suit <em>Your Style</em></h2>
+    </div>
+    <div class="row g-3">
+      <div class="col-md-3 col-sm-6"><div class="stay-card"><img src="image/download (7).jpeg" alt="House" /><div class="stay-overlay"><a href="house.html">House</a><p>Spacious and comfortable, ideal for families.</p></div></div></div>
+      <div class="col-md-3 col-sm-6"><div class="stay-card"><img src="image/download (8).jpeg" alt="Cottage" /><div class="stay-overlay"><a href="Cottage.html">Cottage</a><p>Perfect for a peaceful getaway surrounded by nature.</p></div></div></div>
+      <div class="col-md-3 col-sm-6"><div class="stay-card"><img src="image/download (9).jpeg" alt="Villa" /><div class="stay-overlay"><a href="villa.html">Villa</a><p>Luxurious, private space with a stunning view.</p></div></div></div>
+      <div class="col-md-3 col-sm-6"><div class="stay-card"><img src="image/download (10).jpeg" alt="Chalet" /><div class="stay-overlay"><a href="chalet.html">Chalet</a><p>Ideal for mountain lovers, a cozy alpine retreat.</p></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- INSPIRATION -->
+<section class="inspiration-section" data-aos="fade-up" data-aos-duration="800">
+  <div class="container">
+    <div class="text-center mb-5">
+      <span class="sec-label">✦ Our Story</span>
+      <h2 class="sec-title">HomeStay <em>Inspiration</em></h2>
+    </div>
+    <div>
+      <img src="image/istockphoto.jpeg" alt="Homestay experience" class="ins-img" />
+      <p class="ins-text">
+        Homestays provide a rich tapestry of experiences that connect travelers with local cultures and communities. Imagine sharing meals with a welcoming family, learning to cook traditional dishes, or participating in vibrant festivals that showcase regional customs.
+        <br/><br/>
+        Whether nestled in a serene countryside, a bustling city, or a scenic coastal town, each homestay offers a unique opportunity to immerse yourself in everyday life. From helping on a farm to exploring hidden gems recommended by your hosts, these experiences foster genuine connections and create cherished memories that last long after your journey ends.
       </p>
-      <a
-        href="payment.html"
-        target="_blank"
-        class="btn btn-warning btn-lg shadow-lg"
-        >Book Now</a
-      >
     </div>
+  </div>
+</section>
 
-    <!--  -->
-    <div
-      class="container-fluid my-3 destination"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <div class="row mx-auto my-auto justify-content-center text-center">
-        <h4 class="card-title">Explore India</h4>
-        <p>These popular destinations have a lot to offer</p>
-        <div
-          id="recipeCarousel_03"
-          class="carousel carousel_03"
-          data-bs-ride="carousel"
-        >
-          <div class="carousel-inner" role="listbox">
-            <div class="carousel-item carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\goa.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">Goa</h5></a
-                  >
-                </div>
-              </div>
-            </div>
+<!-- GALLERY -->
+<section class="gallery-section" data-aos="fade-up" data-aos-duration="800" id="gallery">
+  <div class="container-fluid">
+    <div class="text-center mb-2">
+      <span class="sec-label">✦ Visual Stories</span>
+      <h2 class="sec-title">Our <em>Gallery</em></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="gallery-item"><a href="image/download (4).jpeg" target="_blank"><img src="image/download (4).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (28).jpeg" target="_blank"><img src="image/download (28).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (6).jpeg" target="_blank"><img src="image/download (6).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (7).jpeg" target="_blank"><img src="image/download (7).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (8).jpeg" target="_blank"><img src="image/download (8).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (9).jpeg" target="_blank"><img src="image/download (9).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (10).jpeg" target="_blank"><img src="image/download (10).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (30).jpeg" target="_blank"><img src="image/download (30).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (34).jpeg" target="_blank"><img src="image/download (34).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (13).jpeg" target="_blank"><img src="image/download (13).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (14).jpeg" target="_blank"><img src="image/download (14).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (15).jpeg" target="_blank"><img src="image/download (15).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (16).jpeg" target="_blank"><img src="image/download (16).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (17).jpeg" target="_blank"><img src="image/download (17).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (33).jpeg" target="_blank"><img src="image/download (33).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (32).jpeg" target="_blank"><img src="image/download (32).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (34).jpeg" target="_blank"><img src="image/download (34).jpeg" /></a></div>
+      <div class="gallery-item"><a href="image/download (21).jpeg" target="_blank"><img src="image/download (21).jpeg" /></a></div>
+    </div>
+  </div>
+</section>
 
-            <div class="carousel-item carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\munnar.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">
-                      Munnar
-                    </h5></a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item active carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\lonavala.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">
-                      Lonavala
-                    </h5></a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\oty.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">Ooty</h5></a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\Vagamon.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">
-                      Vagamon
-                    </h5></a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\Wayanad.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">
-                      Wayanad
-                    </h5></a
-                  >
-                </div>
-              </div>
-            </div>
-            <div class="carousel-item carousel-item_03">
-              <div class="col-md-2 p-2">
-                <div class="card">
-                  <div class="card-img">
-                    <a href="#">
-                      <img
-                        src="image\Coonoorjpg.jpg"
-                        class="img-fluid"
-                        style="height: 200px"
-                    /></a>
-                  </div>
-                  <a href="" style="text-decoration: none; color: black">
-                    <h5 style="box-shadow: 10px 10px 20px 5px grey">
-                      Coonoor
-                    </h5></a
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <a
-            class="carousel-control-prev bg-transparent w-aut"
-            href="#recipeCarousel_03"
-            role="button"
-            data-bs-slide="prev"
-          >
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          </a>
-          <a
-            class="carousel-control-next bg-transparent w-aut"
-            href="#recipeCarousel_03"
-            role="button"
-            data-bs-slide="next"
-          >
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          </a>
-        </div>
-        <div class="col-12 text-center">
-          <a href="more.html">
-            <button class="btn btn-info mb-5" style="border-radius: 10px">
-              More...
-            </button>
-          </a>
+<!-- FOOTER -->
+<footer>
+  <div class="container-fluid">
+    <div class="row align-items-start g-4">
+      <div class="col-md-4 text-center text-md-start">
+        <h5 class="footer-title">About Home Stay</h5>
+        <hr class="footer-divider" />
+        <p>Experience a cozy and authentic stay with our warm hospitality. Enjoy comfort, home-cooked meals, and a serene environment for an unforgettable getaway.</p>
+      </div>
+      <div class="col-md-4 text-center">
+        <a href="index.html"><img src="image/ogo-design.jpeg" class="footer-logo-img" alt="Logo" /></a>
+        <p class="mt-3" style="color:rgba(255,255,255,0.8);font-size:0.85rem;">Your Home Away From Home</p>
+        <div class="mt-3">
+          <a href="https://www.instagram.com/" target="_blank" class="social-icon"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://www.facebook.com/" target="_blank" class="social-icon"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://x.com/" target="_blank" class="social-icon"><i class="fa-brands fa-x-twitter"></i></a>
         </div>
       </div>
-    </div>
-    <!--  -->
-    <div
-      class="container-fluid mt-5 text-center py-5"
-      style="background-color: rgb(33 37 41 / 41%)"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <div class="row">
-        <h4 class="slide-in text-white">Spend a memorable break</h4>
-        <p class="slide-in text-white">
-          Relax, Refresh and get pampered amidst the landscapes of nature.
-        </p>
+      <div class="col-md-4 text-center text-md-end">
+        <h5 class="footer-title">Contact Us</h5>
+        <hr class="footer-divider" />
+        <p>Email: <a href="mailto:info@homestay.com">info@homestay.com</a></p>
+        <p>Location: <a href="#">123 Cozy Lane, Mountain View</a></p>
       </div>
     </div>
-    <!-- Explore section start  -->
-    <div
-      class="container bg-success-subtle mt-4"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <h1 class="text-center">Explore Home Stay Rooms</h1>
-
-      <div class="row">
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (1).jpeg"
-              alt="Spacious Deluxe Room"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Spacious Deluxe Room</p>
-              <p class="fw-bold">₹1,699</p>
-            </div>
-            <p class="room-description">
-              Enjoy a spacious room with scenic views and modern amenities.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (2).jpeg"
-              alt="Luxury Suite"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Luxury Suite</p>
-              <p class="fw-bold">₹2,699</p>
-            </div>
-            <p class="room-description">
-              Perfect for a lavish stay with unmatched comfort and privacy.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (8).jpeg"
-              alt="Cozy Single Room"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Cozy Single Room</p>
-              <p class="fw-bold">₹1,699</p>
-            </div>
-            <p class="room-description">
-              A perfect fit for solo travelers seeking comfort and tranquility.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (4).jpeg"
-              alt="Budget-Friendly Room"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Budget-Friendly Room</p>
-              <p class="fw-bold">₹999</p>
-            </div>
-            <p class="room-description">
-              Affordable and cozy, ideal for travelers on a budget.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (5).jpeg"
-              alt="Family Room"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Family Room</p>
-              <p class="fw-bold">₹1,999</p>
-            </div>
-            <p class="room-description">
-              Spacious and comfortable for a perfect family getaway.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (6).jpeg"
-              alt="Garden View Room"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Garden View Room</p>
-              <p class="fw-bold">₹1,999</p>
-            </div>
-            <p class="room-description">
-              Enjoy peaceful views of lush gardens from your cozy room.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/download (7).jpeg"
-              alt="Honeymoon Suite"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Honeymoon Suite</p>
-              <p class="fw-bold">₹1,599</p>
-            </div>
-            <p class="room-description">
-              A romantic space designed for newlyweds to relax and unwind.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-md-3 p-2">
-          <div class="position-relative explore-card">
-            <img
-              src="image/images (1).jpeg"
-              alt="Mountain View Room"
-              class="img-thumbnail img-fluid"
-            />
-            <div class="overlay">
-              <p>Mountain View Room</p>
-              <p class="fw-bold">₹2,599</p>
-            </div>
-            <p class="room-description">
-              Wake up to stunning mountain views every morning.
-            </p>
-          </div>
-        </div>
-
-        <div class="col-12 text-center">
-          <a href="Explore.html">
-            <button class="btn btn-info mb-5" style="border-radius: 10px">
-              Explore More
-            </button>
-          </a>
-        </div>
-      </div>
+    <div class="footer-bottom text-center">
+      <p>© 2024 Chalet Home Stay. All Rights Reserved.</p>
     </div>
-    <!-- Facilities section -->
-    <div
-      class="container mt-5 facilities-type"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <h1 class="text-center">Facilities</h1>
-      <div class="row d-flex">
-        <!-- Secured Parking -->
-        <div class="col-md-4 p-2 seq">
-          <div class="facility">
-            <h4 class="text-center text-white flip facility-heading">
-              Secured Parking
-            </h4>
-            <div class="facility-body">
-              <p class="panel">
-                We offer safe and secure parking. Rest easy with our secure
-                parking, ensuring your vehicle is safe throughout your stay.
-                Enjoy peace of mind as you explore and relax!
-              </p>
-            </div>
-          </div>
-        </div>
+  </div>
+</footer>
 
-        <!-- Travel Guide -->
-        <div class="col-md-4 p-2 travel">
-          <div class="facility">
-            <h4 class="text-center text-white flip facility-heading">
-              Travel Guide
-            </h4>
-            <div class="facility-body">
-              <p class="panel">
-                Discover the best of the area with our comprehensive travel
-                guide, featuring hidden gems and local favorites. Let us help
-                you plan unforgettable adventures during your stay.
-              </p>
-            </div>
-          </div>
-        </div>
+<!-- CHAT WIDGET -->
+<div class="chat-widget">
+  <a href="#"><img src="image/web-chat.webp" alt="Chat" /></a>
+</div>
 
-        <!-- Free Wifi -->
-        <div class="col-md-4 p-2 wifi">
-          <div class="facility">
-            <h4 class="text-center text-white flip facility-heading">
-              Free Wifi
-            </h4>
-            <div class="facility-body">
-              <p class="panel">
-                Stay connected with our complimentary Wi-Fi, available
-                throughout the property. Enjoy seamless browsing, streaming, and
-                staying in touch while you relax.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Healthy Food -->
-        <div class="col-md-4 p-2 food">
-          <div class="facility">
-            <h4 class="text-center text-white flip facility-heading">
-              Healthy Food
-            </h4>
-            <div class="facility-body">
-              <p class="panel">
-                Savor delicious and nutritious meals made from fresh, local
-                ingredients. Enjoy healthy dining options that nourish your body
-                and delight your taste buds.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Campfire -->
-        <div class="col-md-4 p-2 camp">
-          <div class="facility">
-            <h4 class="text-center text-white flip facility-heading">
-              Campfire
-            </h4>
-            <div class="facility-body">
-              <p class="panel">
-                Gather around our cozy campfire for unforgettable evenings under
-                the stars. Share stories, enjoy s'mores, and create lasting
-                memories in a warm and inviting atmosphere.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Swimming -->
-        <div class="col-md-4 p-2 swim">
-          <div class="facility">
-            <h4 class="text-center text-white flip facility-heading">
-              Swimming
-            </h4>
-            <div class="facility-body">
-              <p class="panel">
-                Enjoy refreshing swims in our crystal-clear pool,
-                surrounded-circle by stunning views. Dive into relaxation and
-                make lasting memories at our cozy homestay.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container mt-5">
-      <div class="row">
-        <h2 class="text-center text-dark mb-4">Testimonials</h2>
-
-        <div class="col-md-4">
-          <div class="card bg-light">
-            <div class="card-body">
-              <p class="text-dark text-justify">
-                "Staying at this home stay was an unforgettable experience! The
-                hosts were warm and welcoming, making us feel at home. The rooms
-                were clean, cozy, and beautifully decorated. We highly recommend
-                this place to anyone looking for a peaceful retreat!"
-              </p>
-              <div class="d-flex align-items-center mt-3">
-                <p class="testimonial-author mb-0">– Sarah</p>
-                <img
-                  src="image/sara.jpeg"
-                  alt="Sarah & John"
-                  class="testimonials-pic ms-2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card bg-light">
-            <div class="card-body">
-              <p class="testimonial-text">
-                "Our stay here exceeded all expectations! The peaceful
-                surroundings, along with the thoughtful amenities, made for a
-                perfect getaway. The hosts were incredibly accommodating, and
-                the home-cooked meals were a delightful bonus!"
-              </p>
-              <div class="d-flex align-items-center mt-3">
-                <p class="testimonial-author mb-0">– Emma</p>
-                <img
-                  src="image/emma.jpeg"
-                  alt="Mark & Emma"
-                  class="testimonials-pic ms-2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card bg-light">
-            <div class="card-body">
-              <p class="testimonial-text">
-                "This home stay provided us with the perfect balance of comfort
-                and adventure. It felt like we were staying with friends, and
-                every detail was taken care of. We loved the local insights and
-                personal touch that made our trip even more special."
-              </p>
-              <div class="d-flex align-items-center mt-3">
-                <p class="testimonial-author mb-0">– Mark</p>
-                <img
-                  src="image/mark.jpeg"
-                  alt="Jessica & Paul"
-                  class="testimonials-pic ms-2"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      class="container bg-success-subtle mt-4"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <h1 class="text-center mb-4">Find Spaces That Suit Your Style</h1>
-      <div class="row">
-        <!-- House Card -->
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="stay-type text-white position-relative">
-            <img
-              src="image/download (7).jpeg"
-              class="stay-type-img"
-              alt="House Image"
-            />
-            <div class="stay-type-overlay">
-              <p class="stay-type-description">
-                Spacious and comfortable, ideal for families looking for a cozy
-                retreat.
-              </p>
-              <div class="stay-type-title">
-                <a href="house.html">House</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Cottage Card -->
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="stay-type text-white position-relative">
-            <img
-              src="image/download (8).jpeg"
-              class="stay-type-img"
-              alt="Cottage Image"
-            />
-            <div class="stay-type-overlay">
-              <p class="stay-type-description">
-                Perfect for a peaceful getaway surrounded-circle by nature.
-              </p>
-              <div class="stay-type-title">
-                <a href="Cottage.html">Cottage</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Villa Card -->
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="stay-type text-white position-relative">
-            <img
-              src="image/download (9).jpeg"
-              class="stay-type-img"
-              alt="Villa Image"
-            />
-            <div class="stay-type-overlay">
-              <p class="stay-type-description">
-                Luxurious, private space perfect for a getaway with a view.
-              </p>
-              <div class="stay-type-title">
-                <a href="villa.html">Villa</a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Chalet Card -->
-        <div class="col-md-3 col-sm-6 mb-4">
-          <div class="stay-type text-white position-relative">
-            <img
-              src="image/download (10).jpeg"
-              class="stay-type-img"
-              alt="Chalet Image"
-            />
-            <div class="stay-type-overlay">
-              <p class="stay-type-description">
-                Ideal for mountain lovers, offering a cozy alpine retreat.
-              </p>
-              <div class="stay-type-title">
-                <a href="chalet.html">Chalet</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="container mt-5 text-center bg-success-subtle"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <h2>Homestay Inspiration</h2>
-      <div class="row">
-        <div class="col-md-12">
-          <img
-            src="image\istockphoto.jpeg"
-            alt="Homestay experience"
-            class="img-fluid ins"
-            style="max-width: 300px"
-          />
-          <p class="p-5">
-            Homestays provide a rich tapestry of experiences that connect
-            travelers with local cultures and communities. Imagine sharing meals
-            with a welcoming family, learning to cook traditional dishes, or
-            participating in vibrant festivals that showcase regional customs.
-            Whether nestled in a serene countryside, a bustling city, or a
-            scenic coastal town, each homestay offers a unique opportunity to
-            immerse yourself in everyday life. From helping on a farm to
-            exploring hidden gems recommended by your hosts, these experiences
-            foster genuine connections and create cherished memories that last
-            long after your journey ends.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Gallery section -->
-    <div
-      class="container-fluid mt-5 text-center"
-      id="Gallery"
-      data-aos="zoom-in"
-      data-aos-duration="2000"
-    >
-      <h2>Gallery</h2>
-      <div class="row p-2">
-        <div class="col-md-2 gallery">
-          <a href="image\download (4).jpeg" target="_blank"
-            ><img src="image\download (4).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (28).jpeg" target="_blank"
-            ><img src="image\download (28).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (6).jpeg" target="_blank"
-            ><img src="image\download (6).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (7).jpeg" target="_blank"
-            ><img src="image\download (7).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (8).jpeg" target="_blank"
-            ><img src="image\download (8).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (9).jpeg" target="_blank"
-            ><img src="image\download (9).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (10).jpeg" target="_blank"
-            ><img src="image\download (10).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (30).jpeg" target="_blank"
-            ><img src="image\download (30).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (34).jpeg" target="_blank"
-            ><img src="image\download (34).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (13).jpeg" target="_blank"
-            ><img src="image\download (13).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (14).jpeg" target="_blank"
-            ><img src="image\download (14).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (15).jpeg" target="_blank"
-            ><img src="image\download (15).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (16).jpeg" target="_blank"
-            ><img src="image\download (16).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (17).jpeg" target="_blank"
-            ><img src="image\download (17).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (33).jpeg" target="_blank"
-            ><img src="image\download (33).jpeg" class="img-fluid p-1"
-          /></a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (32).jpeg" target="_blank"
-            ><img src="image\download (32).jpeg" class="img-fluid p-1" />
-          </a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (34).jpeg" target="_blank"
-            ><img src="image\download (34).jpeg" class="img-fluid p-1" />
-          </a>
-        </div>
-        <div class="col-md-2 gallery">
-          <a href="image\download (21).jpeg" target="_blank"
-            ><img src="image\download (21).jpeg" class="img-fluid p-1" />
-          </a>
-        </div>
-      </div>
-    </div>
-    <!-- Footer section -->
-    <footer
-      class="container-fluid text-white mt-4 p-5"
-      style="background-color: #8b5a2b; color: white"
-    >
-      <div class="row">
-        <!-- About Section -->
-        <div class="col-md-4 text-center">
-          <h4 style="color: #fff !important; font-weight: bold">
-            About Home Stay
-          </h4>
-          <hr class="bg-light" />
-          <p style="color: #fff !important; font-weight: bold">
-            Experience a cozy and authentic stay with our warm hospitality.
-            Enjoy comfort, home-cooked meals, and a serene environment for an
-            unforgettable getaway.
-          </p>
-        </div>
-
-        <!-- Logo Section -->
-        <div class="col-md-4 text-center">
-          <a href="index.html">
-            <img
-              src="image/ogo-design.jpeg"
-              class="img-fluid rounded-circle"
-              style="width: 120px; height: 120px; mix-blend-mode: darken"
-            />
-          </a>
-          <p class="mt-2" style="color: #fff !important; font-weight: bold">
-            Your Home Away From Home
-          </p>
-        </div>
-
-        <!-- Contact Section -->
-        <div class="col-md-4 text-center">
-          <h4 style="color: #fff !important; font-weight: bold">Contact Us</h4>
-          <hr class="bg-light" />
-          <p style="color: #fff !important; font-weight: bold">
-            Email:
-            <a href="mailto:info@homestay.com" class="text-light"
-              >info@homestay.com</a
-            >
-          </p>
-          <p>
-            Location:
-            <a
-              href="#"
-              class="text-light"
-              style="color: #fff !important; font-weight: bold"
-              >123 Cozy Lane, Mountain View</a
-            >
-          </p>
-          <div class="social-icons mt-3">
-            <a href="https://www.instagram.com/" target="_blank" class="me-3">
-              <i
-                class="fa-brands fa-instagram fa-2x"
-                style="color: #e91e63"
-              ></i>
-            </a>
-            <a href="https://www.facebook.com/" target="_blank" class="me-3">
-              <i class="fa-brands fa-facebook fa-2x" style="color: #0f449b"></i>
-            </a>
-            <a href="https://x.com/" target="_blank">
-              <i class="fa-brands fa-twitter fa-2x" style="color: #000"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-      <div
-        class="text-center mt-4"
-        style="color: #fff !important; font-weight: bold"
-      >
-        <p>&copy; 2024 Chalet Home Stay. All Rights Reserved.</p>
-        <hr />
-      </div>
-    </footer>
-
-    <div class="container d-flex justify-content-end">
-      <a href="#"
-        ><img
-          src="image\web-chat.webp"
-          width="200px"
-          style="position: fixed; right: 0; bottom: 0"
-      /></a>
-    </div>
-  </body>
-  <script type="text/javascript">
-    let items_2 = document.querySelectorAll(".carousel_03 .carousel-item_03");
-
-    items_2.forEach((el) => {
-      const minPerSlide = 6;
-      let next = el.nextElementSibling;
-      for (var i = 1; i < minPerSlide; i++) {
-        if (!next) {
-          // wrap carousel by using first child
-          next = items_2[0];
-        }
-        let cloneChild = next.cloneNode(true);
-        el.appendChild(cloneChild.children[0]);
-        next = next.nextElementSibling;
-      }
-    });
-  </script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script>
-    // Optional jQuery code if needed
-    $(document).ready(function () {
-      $(".flip").hover(
-        function () {
-          $(this)
-            .next(".facility-body")
-            .stop(true, true)
-            .fadeIn("slow")
-            .css("visibility", "visible");
-        },
-        function () {
-          $(this)
-            .next(".facility-body")
-            .stop(true, true)
-            .fadeOut("slow")
-            .css("visibility", "hidden");
-        }
-      );
-    });
-  </script>
-
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-  <script>
-    AOS.init();
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
+  let items_2 = document.querySelectorAll(".carousel_03 .carousel-item_03");
+  items_2.forEach((el) => {
+    const minPerSlide = 6;
+    let next = el.nextElementSibling;
+    for (var i = 1; i < minPerSlide; i++) {
+      if (!next) next = items_2[0];
+      let cloneChild = next.cloneNode(true);
+      el.appendChild(cloneChild.children[0]);
+      next = next.nextElementSibling;
+    }
+  });
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({ once: true });
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 50);
+  });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
